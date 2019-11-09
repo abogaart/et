@@ -5,6 +5,7 @@ Bloomreach Engineering Tooling
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@bloomreach/et.svg)](https://npmjs.org/package/@bloomreach/et)
+[![Tracis CI](https://travis-ci.org/abogaart/et.svg?branch=master)](https://travis-ci.org/abogaart/et)
 [![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/abogaart/et?branch=master&svg=true)](https://ci.appveyor.com/project/abogaart/et/branch/master)
 [![Codecov](https://codecov.io/gh/abogaart/et/branch/master/graph/badge.svg)](https://codecov.io/gh/abogaart/et)
 [![Downloads/week](https://img.shields.io/npm/dw/@bloomreach/et.svg)](https://npmjs.org/package/@bloomreach/et)
