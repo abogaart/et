@@ -57,7 +57,7 @@
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "jest",
-    "test:ci": "jest --coverage-reporters=lcov",
+    "test:ci": "jest --coverage --coverage-reporters=lcov",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"
