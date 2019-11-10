@@ -21,18 +21,4 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
     this.ctx = { flags, args } as EtContext<F>;
     this.log('init ctx', this.ctx);
   }
-
-  async catch(err: any) {
-    // handle any error from the command
-    if (err) {
-      this.error(err);
-    }
-  }
-
-  async finally(err: any) {
-    // called after run and catch regardless of whether or not the command errored
-    if (err) {
-      this.error(err);
-    }
-  }
 }
