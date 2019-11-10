@@ -22,7 +22,7 @@ $ npm install -g @bloomreach/et
 $ et COMMAND
 running command...
 $ et (-v|--version|version)
-@bloomreach/et/0.0.0 darwin-x64 node-v12.10.0
+@bloomreach/et/0.0.0 darwin-x64 node-v12.12.0
 $ et --help [COMMAND]
 USAGE
   $ et COMMAND
@@ -43,9 +43,8 @@ USAGE
   $ et hello [FILE]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -n, --name=name                   name to print
+  --loglevel=error|warn|info|debug
 
 EXAMPLE
   $ et hello
