@@ -19,6 +19,7 @@
     "@oclif/test": "^1",
     "@oclif/tslint": "^3",
     "@types/chai": "^4",
+    "@types/convict": "^4.2.1",
     "@types/jest": "^24.0.22",
     "@types/node": "^10",
     "chai": "^4",

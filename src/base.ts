@@ -6,7 +6,7 @@ import defaultConfig from './config/schema';
 import { checkFileExists } from './utils/file-utils';
 
 export interface EtFlags {
-  loglevel: 'error' | 'warn' | 'info' | 'debug';
+  'log-level': 'error' | 'warn' | 'info' | 'debug';
 }
 
 export interface EtContext<F extends EtFlags> {
@@ -17,26 +17,30 @@ export interface EtContext<F extends EtFlags> {
 
 export abstract class EtCommand<F extends EtFlags> extends Command {
   static flags = {
-    loglevel: flags.string({ options: ['error', 'warn', 'info', 'debug'] })
+    'log-level': flags.string({ options: ['error', 'warn', 'info', 'debug'] })
   };
 
-  protected ctx!: EtContext<F>;
+  private ctx!: EtContext<F>;
 
   async init() {
     const { args, flags } = this.parse(this.constructor as any);
+    const configFromConfigDir = path.resolve(this.config.configDir, 'et.json');
+    const configFromProjectDir = path.resolve(this.config.root, 'et.json');
 
     const configConvict = convict(defaultConfig);
-
-    const configFromConfigDir = path.resolve(this.config.configDir, 'et.json');
     await this.loadConvictConfiguration(configConvict, configFromConfigDir);
-
-    const configFromProjectDir = path.resolve(this.config.root, 'et.json');
     await this.loadConvictConfiguration(configConvict, configFromProjectDir);
 
-    this.ctx = { flags, args, config: configConvict } as EtContext<F>;
+    this.ctx = { flags, args, config: configConvict };
   }
 
-  private async loadConvictConfiguration(configConvict: any, configDir: string) {
+  public async runTask(task: (ctx: EtContext<F>) => Promise<void>) {
+    this.debug(`Running task`);
+    await task(this.ctx);
+    this.debug(`Finished task`);
+  }
+
+  private async loadConvictConfiguration(configConvict: convict.Config<any>, configDir: string) {
     this.debug(`Loading convict configuration from ${configDir}`);
     const exists = await checkFileExists(configDir);
     if (!exists) {
