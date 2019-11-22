@@ -1,6 +1,6 @@
 import { flags } from '@oclif/command';
 
-import { EtCommand, EtFlags, EtContext } from '../base';
+import { EtCommand, EtContext, EtFlags } from '../base';
 
 interface HelloFlags extends EtFlags {
   name: string;
@@ -24,7 +24,7 @@ hello world from ./src/hello.ts!
 
   async run() {
     this.log('before run');
-    this.runTask(async (ctx: EtContext<HelloFlags>) => {
+    await this.runTask(async (ctx: EtContext<HelloFlags>) => {
       const { flags, args } = ctx;
       this.log('ctx from hello', ctx);
 

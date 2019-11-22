@@ -5,9 +5,14 @@ export default {
     default: 'development',
     env: 'NODE_ENV'
   },
-  log_file_path: {
-    doc: 'Log file path',
+  installed: {
+    doc: 'Has the app been installed',
+    default: false,
+    format: 'Boolean',
+  },
+  version: {
+    doc: 'The installed version',
     format: String,
-    default: '/tmp/app.log'
+    default: '0.0.0'
   }
 };

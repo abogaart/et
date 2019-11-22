@@ -6,38 +6,54 @@ import defaultConfig from './config/schema';
 import { checkFileExists } from './utils/file-utils';
 
 export interface EtFlags {
-  'log-level': 'error' | 'warn' | 'info' | 'debug';
+  logLevel: 'error' | 'warn' | 'info' | 'debug';
+  configFile: string;
 }
 
 export interface EtContext<F extends EtFlags> {
   flags: F;
   args: any;
-  config: any;
+  config: convict.Config<object>;
 }
 
 export abstract class EtCommand<F extends EtFlags> extends Command {
   static flags = {
-    'log-level': flags.string({ options: ['error', 'warn', 'info', 'debug'] })
+    logLevel: flags.string({
+      description: 'define the verbosity of ET logging',
+      options: ['error', 'warn', 'info', 'debug']
+    }),
+    configFile: flags.string({
+      description: 'define the name of the config file, e.g. <name>.json',
+      default: 'et',
+    })
   };
 
   private ctx!: EtContext<F>;
 
   async init() {
-    const { args, flags } = this.parse(this.constructor as any);
-    const configFromConfigDir = path.resolve(this.config.configDir, 'et.json');
-    const configFromProjectDir = path.resolve(this.config.root, 'et.json');
+    await super.init();
 
-    const configConvict = convict(defaultConfig);
+    const { args, flags } = this.parse(this.constructor as any);
+
+    const configFile = `${flags.configFile}.json`;
+    const configFromConfigDir = path.resolve(this.config.configDir, configFile);
+    const configFromProjectDir = path.resolve(this.config.root, configFile);
+
+    const configConvict = convict<object>(defaultConfig);
     await this.loadConvictConfiguration(configConvict, configFromConfigDir);
     await this.loadConvictConfiguration(configConvict, configFromProjectDir);
 
     this.ctx = { flags, args, config: configConvict };
   }
 
-  public async runTask(task: (ctx: EtContext<F>) => Promise<void>) {
-    this.debug(`Running task`);
+  public async runTask(task: (ctx: EtContext<F>) => PromiseLike<void>) {
+    this.debug('Running task');
     await task(this.ctx);
-    this.debug(`Finished task`);
+    this.debug('Finished task');
+  }
+
+  protected getContext(): EtContext<F> {
+    return this.ctx;
   }
 
   private async loadConvictConfiguration(configConvict: convict.Config<any>, configDir: string) {
