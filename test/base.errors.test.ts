@@ -1,14 +1,9 @@
-import { EtCommand, EtFlags } from '../src/base';
-import { flags } from '@oclif/command';
+import * as convict from 'convict';
+
+import { TestCommand } from './__mocks__';
+
 jest.mock('convict');
-
-import * as _mockConvict from 'convict';
-const mockConvict =  _mockConvict as any as jest.Mock;
-
-class TestCommand extends EtCommand<EtFlags> {
-  static flags = EtCommand.flags;
-  run = jest.fn()
-}
+const mockConvict = convict as any as jest.Mock;
 
 describe('base command', () => {
   describe('init', () => {
@@ -32,23 +27,36 @@ describe('base command', () => {
       convictConfig.loadFile = () => { throw new Error('File not found'); };
       try {
         await cmd.init();
+        fail('should have thrown an error');
       } catch (e) {
         expect(e.message).toContain('Error: File not found');
-        return;
       }
-      fail('should have thrown an error');
     });
 
     it('errors if the loaded configuration is not valid', async () => {
       convictConfig.validate = () => { throw new Error('Config not valid'); };
       try {
         await cmd.init();
+        fail('should have thrown an error');
       } catch (e) {
         expect(e.message).toContain('Error: Config not valid');
-        return;
       }
-      fail('should have thrown an error');
     });
 
-  })
+    it('errors if a task is ran without calling init()', async () => {
+      try {
+        await cmd.runTask();
+        fail('should have thrown an error');
+      } catch (e) {
+        expect(e.message).toContain('Init must be called before trying to access this.ctx');
+      }
+
+      try {
+        await cmd.runTasks();
+        fail('should have thrown an error');
+      } catch (e) {
+        expect(e.message).toContain('Init must be called before trying to access this.ctx');
+      }
+    });
+  });
 });

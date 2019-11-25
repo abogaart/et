@@ -1,14 +1,20 @@
-import { expect } from '@oclif/test';
-import { EtCommand, EtFlags, EtContext } from '../src/base';
 import { flags } from '@oclif/command';
+import { IConfig } from '@oclif/config';
+import { expect } from '@oclif/test';
+import * as Listr from 'listr';
+
+import { EtContext, EtFlags } from '../src/base';
+
+import { jestExpect, TestCommand } from './__mocks__';
+jest.mock('listr');
 
 interface TestFlags extends EtFlags {
   name: string;
 }
 
-class TestCommand extends EtCommand<TestFlags> {
+class BaseTestCommand extends TestCommand<TestFlags> {
   static flags = {
-    ...EtCommand.flags,
+    ...TestCommand.flags,
     name: flags.string(),
   };
 
@@ -16,27 +22,18 @@ class TestCommand extends EtCommand<TestFlags> {
     { name: 'testArg1' },
     { name: 'testArg2' },
   ];
-
-  run = jest.fn()
-
-  get context() {
-    return this.getContext();
-  }
 }
+
+const cfg = {
+  configDir: './test/__mocks__/user-dir',
+  root: './test/__mocks__/project-dir'
+} as IConfig;
+const defaultCfg = { ...cfg, root: '', configDir: '' };
 
 describe('base command', () => {
   describe('init', () => {
-    let cfg;
-
-    beforeEach(() => {
-      cfg = {
-        configDir: './test/__mocks__/user-dir',
-        root: './test/__mocks__/project-dir'
-      };
-    });
-
     it('creates a context', async () => {
-      const cmd = new TestCommand([], cfg);
+      const cmd = new BaseTestCommand([], cfg);
       await cmd.init();
 
       expect(cmd.context).to.not.be.null;
@@ -44,7 +41,7 @@ describe('base command', () => {
     });
 
     it('parses CLI args and flags', async () => {
-      const cmd = new TestCommand(['arg1', 'arg2', '--name', 'myName'], cfg);
+      const cmd = new BaseTestCommand(['arg1', 'arg2', '--name', 'myName'], cfg);
       await cmd.init();
 
       expect(cmd.context.args).to.not.be.null;
@@ -58,7 +55,7 @@ describe('base command', () => {
     });
 
     it('creates a default configuration', async () => {
-      const cmd = new TestCommand([], { ...cfg, root: './noop', configDir: './noop' });
+      const cmd = new BaseTestCommand([], { ...cfg, root: './noop', configDir: './noop' });
       await cmd.init();
 
       const config = cmd.context.config;
@@ -69,38 +66,69 @@ describe('base command', () => {
     });
 
     it('has a configurable config file name', async () => {
-      const cmd = new TestCommand(['--configFile', 'bet'], { ...cfg, root: './test/__mocks__' });
+      const cmd = new BaseTestCommand(['--configFile', 'bet'], { ...cfg, root: './test/__mocks__' });
       await cmd.init();
 
       expect(cmd.context.config.get('version')).to.equal('bet');
     });
 
     it('reads from the user config dir', async () => {
-      const cmd = new TestCommand([], { ...cfg, root: '' });
+      const cmd = new BaseTestCommand([], { ...cfg, root: '' });
       await cmd.init();
 
       const config = cmd.context.config;
       expect(config.get('installed')).to.be.true;
-      expect(config.get('version')).to.equal("user-dir");
+      expect(config.get('version')).to.equal('user-dir');
     });
 
     it('reads from the project dir', async () => {
-      const cmd = new TestCommand([], cfg);
+      const cmd = new BaseTestCommand([], cfg);
       await cmd.init();
 
       const config = cmd.context.config;
       expect(config.get('installed')).to.be.true;
-      expect(config.get('version')).to.equal("project-dir");
+      expect(config.get('version')).to.equal('project-dir');
     });
+  });
 
+  describe('runTask', () => {
     it('runs a task', async () => {
-      const cmd = new TestCommand([], { ...cfg, root: '', configDir: '' });
+      const cmd = new BaseTestCommand([], defaultCfg);
       await cmd.init();
       await cmd.runTask(async (ctx: EtContext<TestFlags>) => {
+        expect(ctx).to.equal(cmd.context);
         expect(ctx.config.get('installed')).to.be.false;
         expect(ctx.config.get('version')).to.equal('0.0.0');
       });
     });
+  });
 
-  })
+  describe('runTasks', () => {
+    it('runs Listr tasks', async () => {
+      const cmd = new BaseTestCommand([], defaultCfg);
+      await cmd.init();
+
+      const tasks = [
+        { title: 'task 1', task:  jest.fn() },
+        { title: 'task 2', task:  jest.fn() },
+      ];
+      const generateTasks = jest.fn().mockReturnValue(tasks);
+      await cmd.runTasks(generateTasks, { renderer: 'silent' });
+
+      jestExpect(generateTasks).toHaveBeenCalledWith(cmd.context);
+      jestExpect(Listr).toHaveBeenCalledWith(tasks, { dateFormat: false, renderer: 'silent' });
+    });
+
+    it('generates options from a function if argument is a function', async () => {
+      const cmd = new BaseTestCommand([], defaultCfg);
+      await cmd.init();
+
+      const tasks = [{ title: 'task 1', task:  jest.fn() }];
+      const generateOptions = jest.fn().mockReturnValue({ testOption: true });
+      await cmd.runTasks(() => tasks, generateOptions);
+
+      jestExpect(generateOptions).toHaveBeenCalledWith(cmd.context);
+      jestExpect(Listr).toHaveBeenCalledWith(tasks, jestExpect.objectContaining({ testOption: true }));
+    });
+  });
 });

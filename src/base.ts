@@ -1,5 +1,6 @@
 import Command, { flags } from '@oclif/command';
 import * as convict from 'convict';
+import * as Listr from 'listr';
 import * as path from 'path';
 
 import defaultConfig from './config/schema';
@@ -28,6 +29,8 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
     })
   };
 
+  public tasks: Listr.ListrTask[] = [];
+
   private ctx!: EtContext<F>;
 
   async init() {
@@ -47,9 +50,30 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
   }
 
   public async runTask(task: (ctx: EtContext<F>) => PromiseLike<void>) {
+    if (!this.ctx) {
+      this.error('Init must be called before trying to access this.ctx');
+    }
+
     this.debug('Running task');
     await task(this.ctx);
     this.debug('Finished task');
+  }
+
+  public async runTasks<Result>(
+    generateTasks: (ctx: EtContext<F>) => Listr.ListrTask[],
+    options?: Listr.ListrOptions | ((ctx: EtContext<F>) => Listr.ListrOptions)
+  ): Promise<Result> {
+    if (!this.ctx) {
+      this.error('Init must be called before trying to access this.ctx');
+    }
+
+    const tasks = [...this.tasks, ...await generateTasks(this.ctx)];
+    this.debug('Running tasks ' + tasks);
+    return new Listr(tasks, {
+      ...(options && typeof options === 'function' ? options(this.ctx) : options),
+      // @ts-ignore This option is added by https://github.com/SamVerschueren/listr-verbose-renderer#options
+      dateFormat: false
+    }).run();
   }
 
   protected getContext(): EtContext<F> {

@@ -22,7 +22,7 @@ $ npm install -g @bloomreach/et
 $ et COMMAND
 running command...
 $ et (-v|--version|version)
-@bloomreach/et/0.0.0 darwin-x64 node-v12.12.0
+@bloomreach/et/0.0.0 darwin-x64 node-v13.1.0
 $ et --help [COMMAND]
 USAGE
   $ et COMMAND
@@ -44,7 +44,8 @@ USAGE
 
 OPTIONS
   -n, --name=name                   name to print
-  --loglevel=error|warn|info|debug
+  --configFile=configFile           [default: et] define the name of the config file, e.g. <name>.json
+  --logLevel=error|warn|info|debug  define the verbosity of ET logging
 
 EXAMPLE
   $ et hello
