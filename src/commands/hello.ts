@@ -24,6 +24,27 @@ hello world from ./src/hello.ts!
 
   async run() {
     this.log('before run');
+    await this.runTasks(() => {
+      return [
+        {
+          title: 'Git',
+          task:  async () => {
+            return new Promise(resolve => {
+              setTimeout(() => resolve(), 1000);
+            });
+          }
+        },
+        {
+          title: 'Git2',
+          task:  async () => {
+            return new Promise(resolve => {
+              setTimeout(() => resolve(), 1000);
+            });
+          }
+        }
+      ];
+    });
+
     await this.runTask(async (ctx: EtContext<HelloFlags>) => {
       const { flags, args } = ctx;
       this.log('ctx from hello', ctx);
