@@ -3,7 +3,7 @@ import * as convict from 'convict';
 import * as path from 'path';
 
 import defaultConfig from './config/schema';
-import { checkFileExists } from './utils/file-utils';
+import { checkPathExists } from './utils/file-utils';
 
 export interface EtFlags {
   logLevel: 'error' | 'warn' | 'info' | 'debug';
@@ -58,7 +58,7 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
 
   private async loadConvictConfiguration(configConvict: convict.Config<any>, configDir: string) {
     this.debug(`Loading convict configuration from ${configDir}`);
-    const exists = await checkFileExists(configDir);
+    const exists = await checkPathExists(configDir);
     if (!exists) {
       this.debug(`File ${configDir} does not exist, skipping`);
       return;
