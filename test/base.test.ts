@@ -113,10 +113,10 @@ describe('base command', () => {
         { title: 'task 2', task:  jest.fn() },
       ];
       const generateTasks = jest.fn().mockReturnValue(tasks);
-      await cmd.runTasks(generateTasks, { renderer: 'silent' });
+      await cmd.runTasks(generateTasks, { renderer: 'silent', nonTTYRenderer: 'silent' });
 
       jestExpect(generateTasks).toHaveBeenCalledWith(cmd.context);
-      jestExpect(Listr).toHaveBeenCalledWith(tasks, { dateFormat: false, renderer: 'silent' });
+      jestExpect(Listr).toHaveBeenCalledWith(tasks, { dateFormat: false, renderer: 'silent', nonTTYRenderer: 'silent' });
     });
 
     it('generates options from a function if argument is a function', async () => {
