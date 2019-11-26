@@ -54,29 +54,31 @@ describe('base command', () => {
       expect(cmd.context.flags.name).to.equal('myName');
     });
 
-    it('creates a default configuration', async () => {
-      const cmd = new BaseTestCommand([], { ...cfg, root: './noop', configDir: './noop' });
+    it('creates a default app and cli configuration', async () => {
+      const cliConfig = { ...cfg, root: './noop', configDir: './noop' };
+      const cmd = new BaseTestCommand([], cliConfig);
       await cmd.init();
 
       const config = cmd.context.config;
       expect(config).to.not.be.null;
       expect(config).to.not.be.undefined;
-      expect(config.get('installed')).to.be.false;
-      expect(config.get('version')).to.equal('0.0.0');
+      expect(config.app.get('installed')).to.be.false;
+      expect(config.app.get('version')).to.equal('0.0.0');
+      expect(config.cli).to.equal(cliConfig);
     });
 
     it('has a configurable config file name', async () => {
       const cmd = new BaseTestCommand(['--configFile', 'bet'], { ...cfg, root: './test/__mocks__' });
       await cmd.init();
 
-      expect(cmd.context.config.get('version')).to.equal('bet');
+      expect(cmd.context.config.app.get('version')).to.equal('bet');
     });
 
     it('reads from the user config dir', async () => {
       const cmd = new BaseTestCommand([], { ...cfg, root: '' });
       await cmd.init();
 
-      const config = cmd.context.config;
+      const config = cmd.context.config.app;
       expect(config.get('installed')).to.be.true;
       expect(config.get('version')).to.equal('user-dir');
     });
@@ -85,7 +87,7 @@ describe('base command', () => {
       const cmd = new BaseTestCommand([], cfg);
       await cmd.init();
 
-      const config = cmd.context.config;
+      const config = cmd.context.config.app;
       expect(config.get('installed')).to.be.true;
       expect(config.get('version')).to.equal('project-dir');
     });
@@ -97,8 +99,6 @@ describe('base command', () => {
       await cmd.init();
       await cmd.runTask(async (ctx: EtContext<TestFlags>) => {
         expect(ctx).to.equal(cmd.context);
-        expect(ctx.config.get('installed')).to.be.false;
-        expect(ctx.config.get('version')).to.equal('0.0.0');
       });
     });
   });

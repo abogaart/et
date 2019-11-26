@@ -1,4 +1,5 @@
 import Command, { flags } from '@oclif/command';
+import { IConfig } from '@oclif/config';
 import * as convict from 'convict';
 import * as Listr from 'listr';
 import * as path from 'path';
@@ -14,7 +15,10 @@ export interface EtFlags {
 export interface EtContext<F extends EtFlags> {
   flags: F;
   args: any;
-  config: convict.Config<object>;
+  config: {
+    app: convict.Config<object>;
+    cli: IConfig;
+  };
 }
 
 export abstract class EtCommand<F extends EtFlags> extends Command {
@@ -46,7 +50,14 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
     await this.loadConvictConfiguration(configConvict, configFromConfigDir);
     await this.loadConvictConfiguration(configConvict, configFromProjectDir);
 
-    this.ctx = { flags, args, config: configConvict };
+    this.ctx = {
+      flags,
+      args,
+      config: {
+        app: configConvict,
+        cli: this.config,
+      }
+    };
   }
 
   public async runTask(task: (ctx: EtContext<F>) => PromiseLike<void>) {
