@@ -81,6 +81,7 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
     const tasks = [...this.tasks, ...await generateTasks(this.ctx)];
     this.debug('Running tasks ' + tasks);
     return new Listr(tasks, {
+      ...(process.env.NODE_ENV === 'test' && { renderer: 'verbose', nonTTYRenderer: 'verbose' }),
       ...(options && typeof options === 'function' ? options(this.ctx) : options),
       // @ts-ignore This option is added by https://github.com/SamVerschueren/listr-verbose-renderer#options
       dateFormat: false
