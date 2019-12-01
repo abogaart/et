@@ -7,3 +7,8 @@ export async function checkPathExists(filePath: string) {
     });
   });
 }
+
+export function findLinkedFile(file: string): string {
+  if (!fs.lstatSync(file).isSymbolicLink()) return file;
+  return findLinkedFile(fs.realpathSync(file));
+}
