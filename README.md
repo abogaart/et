@@ -33,6 +33,7 @@ USAGE
 <!-- commands -->
 * [`et hello [FILE]`](#et-hello-file)
 * [`et help [COMMAND]`](#et-help-command)
+* [`et setup`](#et-setup)
 
 ## `et hello [FILE]`
 
@@ -70,4 +71,22 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+
+## `et setup`
+
+Setup the Bloomreach environment
+
+```
+USAGE
+  $ et setup
+
+OPTIONS
+  --configFile=configFile           [default: et] define the name of the config file, e.g. <name>.json
+  --logLevel=error|warn|info|debug  define the verbosity of ET logging
+
+EXAMPLE
+  $ et setup
+```
+
+_See code: [src/commands/setup/index.ts](https://github.com/abogaart/et/blob/v0.0.0/src/commands/setup/index.ts)_
 <!-- commandsstop -->

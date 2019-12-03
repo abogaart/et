@@ -2,9 +2,10 @@ import Command, { flags } from '@oclif/command';
 import { IConfig } from '@oclif/config';
 import * as convict from 'convict';
 import * as Listr from 'listr';
-// Use the forked version of default listr renderer
-import * as UpdateRenderer from 'listr-update-renderer';
 import * as path from 'path';
+
+// Use the forked version of default listr renderer
+const UpdateRenderer = require('listr-update-renderer');
 
 import defaultConfig from './config/schema';
 import { checkPathExists } from './utils/file-utils';
