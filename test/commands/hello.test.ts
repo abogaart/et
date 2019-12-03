@@ -1,5 +1,6 @@
 import { expect, test } from '@oclif/test';
 
+// tslint:disable-next-line:no-implicit-dependencies
 const listrVerboseRenderer = require('listr-verbose-renderer');
 jest.mock('listr-verbose-renderer');
 

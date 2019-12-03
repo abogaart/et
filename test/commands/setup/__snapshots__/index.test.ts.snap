@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`already installed print merged config if already stalled 1`] = `
+"ET is installed with the following properties
+{
+  \\"env\\": \\"test\\",
+  \\"installed\\": true,
+  \\"version\\": \\"bet-installed\\",
+  \\"git\\": {
+    \\"path\\": \\"git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn\\"
+  }
+}
+"
+`;
+
+exports[`setup - initial setup - can select absolute path from global installed git, java and mvn executables 1`] = `
+"
+ET has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+Git found at 'git.which' (v1.2.3) [title changed]
+Git found at 'git.which' (v1.2.3) [completed]
+Detect Java executable [started]
+Java detected at 'java.which' (v2.3.4) [title changed]
+Java detected at 'java.which' (v2.3.4) [completed]
+Detect Maven [started]
+Maven detected at 'mvn.which' (v3.4.5) [title changed]
+Maven detected at 'mvn.which' (v3.4.5) [completed]
+
+Setup has successfully finished {
+  env: 'test',
+  installed: true,
+  version: '0.0.0',
+  git: { path: 'git.which' },
+  java: { path: 'java.which' },
+  mvn: { path: 'mvn.which' }
+}
+"
+`;
+
+exports[`setup - initial setup - can select symlink resolved absolute path from global installed git, java and mvn executables 1`] = `
+"
+ET has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+Git found at 'git.which.canonical' (v1.2.3) [title changed]
+Git found at 'git.which.canonical' (v1.2.3) [completed]
+Detect Java executable [started]
+Java detected at 'java.which.canonical' (v2.3.4) [title changed]
+Java detected at 'java.which.canonical' (v2.3.4) [completed]
+Detect Maven [started]
+Maven detected at 'mvn.which.canonical' (v3.4.5) [title changed]
+Maven detected at 'mvn.which.canonical' (v3.4.5) [completed]
+
+Setup has successfully finished {
+  env: 'test',
+  installed: true,
+  version: '0.0.0',
+  git: { path: 'git.which.canonical' },
+  java: { path: 'java.which.canonical' },
+  mvn: { path: 'mvn.which.canonical' }
+}
+"
+`;
+
+exports[`setup - initial setup - custom path not set - prints an error if custom git path is not set 1`] = `"Setup failed, please install Git first. For more info see https://www.atlassian.com/git/tutorials/install-git"`;
+
+exports[`setup - initial setup - custom path not set - prints an error if custom java path is not set 1`] = `"Setup failed, please install Java first. For more info see https://www.java.com/en/download/help/download_options.xml"`;
+
+exports[`setup - initial setup - custom path not set - prints an error if custom mvn path is not set 1`] = `"Setup failed, please install Maven first. For more info see https://maven.apache.org/install.html"`;
+
+exports[`setup - initial setup - finds global installed git, java and mvn executables 1`] = `
+"
+ET has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+Git found at 'git' (v1.2.3) [title changed]
+Git found at 'git' (v1.2.3) [completed]
+Detect Java executable [started]
+Java detected at 'java' (v2.3.4) [title changed]
+Java detected at 'java' (v2.3.4) [completed]
+Detect Maven [started]
+Maven detected at 'mvn' (v3.4.5) [title changed]
+Maven detected at 'mvn' (v3.4.5) [completed]
+
+Setup has successfully finished {
+  env: 'test',
+  installed: true,
+  version: '0.0.0',
+  git: { path: 'git' },
+  java: { path: 'java' },
+  mvn: { path: 'mvn' }
+}
+"
+`;
+
+exports[`setup - initial setup - present option to set custom paths 1`] = `
+"
+ET has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+Git found at '/custom-path/git' (v1.2.3) [title changed]
+Git found at '/custom-path/git' (v1.2.3) [completed]
+Detect Java executable [started]
+Java detected at '/custom-path/java' (v2.3.4) [title changed]
+Java detected at '/custom-path/java' (v2.3.4) [completed]
+Detect Maven [started]
+Maven detected at '/custom-path/maven' (v3.4.5) [title changed]
+Maven detected at '/custom-path/maven' (v3.4.5) [completed]
+
+Setup has successfully finished {
+  env: 'test',
+  installed: true,
+  version: '0.0.0',
+  git: { path: '/custom-path/git' },
+  java: { path: '/custom-path/java' },
+  mvn: { path: '/custom-path/maven' }
+}
+"
+`;
+
+exports[`setup - initial setup - prints an error if git path is invalid 1`] = `"Failed to verify git executable at 'git'"`;
+
+exports[`setup - initial setup - prints an error if java path is invalid 1`] = `"Failed to verify java executable at 'java'"`;
+
+exports[`setup - initial setup - prints an error if maven path is invalid 1`] = `"Failed to verify Maven executable at 'mvn'"`;
+
+exports[`setup - initial setup - tries to find java-home when "which" command fails 1`] = `
+"
+ET has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+Git found at 'git' (v1.2.3) [title changed]
+Git found at 'git' (v1.2.3) [completed]
+Detect Java executable [started]
+Java detected at './java-home' (v2.3.4) [title changed]
+Java detected at './java-home' (v2.3.4) [completed]
+Detect Maven [started]
+Maven detected at 'mvn' (v3.4.5) [title changed]
+Maven detected at 'mvn' (v3.4.5) [completed]
+
+Setup has successfully finished {
+  env: 'test',
+  installed: true,
+  version: '0.0.0',
+  git: { path: 'git' },
+  java: { path: './java-home' },
+  mvn: { path: 'mvn' }
+}
+"
+`;

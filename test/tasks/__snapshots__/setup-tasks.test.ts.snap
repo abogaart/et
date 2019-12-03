@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`setup tasks choice invokes listr-inquirer with a choice list 1`] = `
+Array [
+  Object {
+    "choices": Array [
+      "choice1",
+      "choice2",
+    ],
+    "message": "msg",
+    "name": "choice",
+    "type": "list",
+  },
+]
+`;
+
+exports[`setup tasks confirm 1`] = `
+Object {
+  "message": "confirm-msg",
+  "name": "continue",
+  "type": "confirm",
+}
+`;
+
+exports[`setup tasks customPath shows custom path input option 1`] = `
+Object {
+  "message": "path-label",
+  "name": "customPath",
+  "type": "input",
+  "validate": [Function],
+  "when": [Function],
+}
+`;
+
+exports[`setup tasks customPath starts with a confirmation 1`] = `
+Object {
+  "message": "confirm-msg",
+  "name": "continue",
+  "type": "confirm",
+}
+`;

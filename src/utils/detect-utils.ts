@@ -5,7 +5,8 @@ const which = require('which');
 export async function tryWhich(exec: string): Promise<string | null> {
   try {
     return await which(exec);
-  } catch (e) {
+  // tslint:disable-next-line:no-unused
+  } catch (ignore) {
     return null;
   }
 }

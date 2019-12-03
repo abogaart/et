@@ -2,6 +2,8 @@ import Command, { flags } from '@oclif/command';
 import { IConfig } from '@oclif/config';
 import * as convict from 'convict';
 import * as Listr from 'listr';
+// Use the forked version of default listr renderer
+import * as UpdateRenderer from 'listr-update-renderer';
 import * as path from 'path';
 
 import defaultConfig from './config/schema';
@@ -81,6 +83,7 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
     const tasks = [...this.tasks, ...await generateTasks(this.ctx)];
     this.debug('Running tasks ' + tasks);
     return new Listr(tasks, {
+      renderer: UpdateRenderer,
       ...(process.env.NODE_ENV === 'test' && { renderer: 'verbose', nonTTYRenderer: 'verbose' }),
       ...(options && typeof options === 'function' ? options(this.ctx) : options),
       // @ts-ignore This option is added by https://github.com/SamVerschueren/listr-verbose-renderer#options
@@ -113,5 +116,6 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
     }
 
     this.debug(`Successfully loaded and validated convict configuration from ${configDir}`);
+    this.debug(configConvict.getProperties());
   }
 }

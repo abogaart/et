@@ -9,6 +9,7 @@ function createLink(target: string, link: string) {
     if (stat.isSymbolicLink()) {
       return;
     }
+  // tslint:disable-next-line:no-unused
   } catch (e) {
   }
 
@@ -33,9 +34,9 @@ describe('File utils tests', () => {
   });
 
   describe('findLinkedFile', () => {
-    const target = path.resolve('./test/__mocks__/bet.json');
-    const link = path.resolve('./test/__mocks__/bet-link.json');
-    const link2link = path.resolve('./test/__mocks__/bet-link-link.json');
+    const target = path.resolve('./test/__fixtures__/bet.json');
+    const link = path.resolve('./test/__fixtures__/bet-link.json');
+    const link2link = path.resolve('./test/__fixtures__/bet-link-link.json');
 
     it('resolves symbolic links to a canonical path', () => {
       createLink(target, link);

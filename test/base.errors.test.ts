@@ -19,7 +19,7 @@ describe('base command', () => {
 
       cmd = new TestCommand([], {
         root: '',
-        configDir: './test/__mocks__/user-dir'
+        configDir: './test/__fixtures__/user-dir'
       } as any);
     });
 

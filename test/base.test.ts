@@ -25,8 +25,8 @@ class BaseTestCommand extends TestCommand<TestFlags> {
 }
 
 const cfg = {
-  configDir: './test/__mocks__/user-dir',
-  root: './test/__mocks__/project-dir'
+  configDir: './test/__fixtures__/user-dir',
+  root: './test/__fixtures__/project-dir'
 } as IConfig;
 const defaultCfg = { ...cfg, root: '', configDir: '' };
 
@@ -68,7 +68,7 @@ describe('base command', () => {
     });
 
     it('has a configurable config file name', async () => {
-      const cmd = new BaseTestCommand(['--configFile', 'bet'], { ...cfg, root: './test/__mocks__' });
+      const cmd = new BaseTestCommand(['--configFile', 'bet'], { ...cfg, root: './test/__fixtures__' });
       await cmd.init();
 
       expect(cmd.context.config.app.get('version')).to.equal('bet');

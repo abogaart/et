@@ -1,8 +1,7 @@
-const path = require('path');
 const execa = require('execa');
 jest.mock('execa');
 
-import { getJavaVersion, getGitVersion, getMavenVersion } from '../../src/utils/version-utils';
+import { getGitVersion, getJavaVersion, getMavenVersion } from '../../src/utils/version-utils';
 
 describe('version utils', () => {
   describe('getJavaVersion', () => {

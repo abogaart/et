@@ -12,8 +12,15 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
     "convict": "^5.2.0",
+    "execa": "^3.4.0",
+    "find-java-home": "^1.1.0",
+    "inquirer": "^7.0.0",
     "listr": "^0.14.3",
-    "tslib": "^1"
+    "listr-inquirer": "^0.1.0",
+    "listr-update-renderer": "https://github.com/abogaart/listr-update-renderer",
+    "simple-git": "^1.126.0",
+    "tslib": "^1",
+    "which": "^2.0.2"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
@@ -55,6 +62,8 @@
   },
   "repository": "abogaart/et",
   "scripts": {
+    "compile": "rm -rf lib && tsc -b",
+    "lint": "tslint -p test -t stylish",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
