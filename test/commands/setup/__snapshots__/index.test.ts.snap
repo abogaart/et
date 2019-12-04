@@ -33,13 +33,20 @@ Detect Maven [started]
 Maven detected at 'mvn.which' (v3.4.5) [title changed]
 Maven detected at 'mvn.which' (v3.4.5) [completed]
 
-Setup has successfully finished {
-  env: 'test',
-  installed: true,
-  version: '0.0.0',
-  git: { path: 'git.which' },
-  java: { path: 'java.which' },
-  mvn: { path: 'mvn.which' }
+Setup has successfully finished
+{
+  \\"env\\": \\"test\\",
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"git.which\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"java.which\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn.which\\"
+  }
 }
 "
 `;
@@ -58,13 +65,20 @@ Detect Maven [started]
 Maven detected at 'mvn.which.canonical' (v3.4.5) [title changed]
 Maven detected at 'mvn.which.canonical' (v3.4.5) [completed]
 
-Setup has successfully finished {
-  env: 'test',
-  installed: true,
-  version: '0.0.0',
-  git: { path: 'git.which.canonical' },
-  java: { path: 'java.which.canonical' },
-  mvn: { path: 'mvn.which.canonical' }
+Setup has successfully finished
+{
+  \\"env\\": \\"test\\",
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"git.which.canonical\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"java.which.canonical\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn.which.canonical\\"
+  }
 }
 "
 `;
@@ -89,13 +103,20 @@ Detect Maven [started]
 Maven detected at 'mvn' (v3.4.5) [title changed]
 Maven detected at 'mvn' (v3.4.5) [completed]
 
-Setup has successfully finished {
-  env: 'test',
-  installed: true,
-  version: '0.0.0',
-  git: { path: 'git' },
-  java: { path: 'java' },
-  mvn: { path: 'mvn' }
+Setup has successfully finished
+{
+  \\"env\\": \\"test\\",
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn\\"
+  }
 }
 "
 `;
@@ -114,13 +135,20 @@ Detect Maven [started]
 Maven detected at '/custom-path/maven' (v3.4.5) [title changed]
 Maven detected at '/custom-path/maven' (v3.4.5) [completed]
 
-Setup has successfully finished {
-  env: 'test',
-  installed: true,
-  version: '0.0.0',
-  git: { path: '/custom-path/git' },
-  java: { path: '/custom-path/java' },
-  mvn: { path: '/custom-path/maven' }
+Setup has successfully finished
+{
+  \\"env\\": \\"test\\",
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"/custom-path/git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"/custom-path/java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"/custom-path/maven\\"
+  }
 }
 "
 `;
@@ -145,13 +173,20 @@ Detect Maven [started]
 Maven detected at 'mvn' (v3.4.5) [title changed]
 Maven detected at 'mvn' (v3.4.5) [completed]
 
-Setup has successfully finished {
-  env: 'test',
-  installed: true,
-  version: '0.0.0',
-  git: { path: 'git' },
-  java: { path: './java-home' },
-  mvn: { path: 'mvn' }
+Setup has successfully finished
+{
+  \\"env\\": \\"test\\",
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"./java-home\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn\\"
+  }
 }
 "
 `;
