@@ -139,7 +139,7 @@ export default class Setup extends EtCommand<SetupFlags> {
       await this.runTasks(() => tasks);
 
       app.set('installed', true);
-      this.log('\nSetup has successfully finished', app.getProperties());
+      this.log(`\nSetup has successfully finished\n${app}`);
     }
   }
 
