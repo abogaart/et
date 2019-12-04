@@ -1,4 +1,5 @@
 import { test } from '@oclif/test';
+const normalizeNewline = require('normalize-newline');
 
 import { taskError } from '../../../src/tasks/error-tasks';
 import { Tasks } from '../../../src/tasks/setup-tasks';
@@ -69,7 +70,7 @@ describe('setup -', () => {
       .stdout()
       .command(['setup'])
       .it('finds global installed git, java and mvn executables', (ctx: any) => {
-        jestExpect(ctx.stdout).toMatchSnapshot();
+        jestExpect(normalizeNewline(ctx.stdout)).toMatchSnapshot();
       });
 
     test
@@ -77,7 +78,7 @@ describe('setup -', () => {
       .stdout()
       .command(['setup'])
       .it('can select absolute path from global installed git, java and mvn executables', (ctx: any) => {
-        jestExpect(ctx.stdout).toMatchSnapshot();
+        jestExpect(normalizeNewline(ctx.stdout)).toMatchSnapshot();
       });
 
     test
@@ -85,7 +86,7 @@ describe('setup -', () => {
       .stdout()
       .command(['setup'])
       .it('can select symlink resolved absolute path from global installed git, java and mvn executables', (ctx: any) => {
-        jestExpect(ctx.stdout).toMatchSnapshot();
+        jestExpect(normalizeNewline(ctx.stdout)).toMatchSnapshot();
       });
 
     test
@@ -93,7 +94,7 @@ describe('setup -', () => {
       .stdout()
       .command(['setup'])
       .it('tries to find java-home when "which" command fails', (ctx: any) => {
-        jestExpect(ctx.stdout).toMatchSnapshot();
+        jestExpect(normalizeNewline(ctx.stdout)).toMatchSnapshot();
       });
 
     test
@@ -104,7 +105,7 @@ describe('setup -', () => {
       .stdout()
       .command(['setup'])
       .it('present option to set custom paths', (ctx: any) => {
-        jestExpect(ctx.stdout).toMatchSnapshot();
+        jestExpect(normalizeNewline(ctx.stdout)).toMatchSnapshot();
       });
 
     test
