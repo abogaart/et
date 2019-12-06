@@ -3,11 +3,13 @@ import { taskError, Tasks } from '@bloomreach/cli-tasks';
 import { detectJavaPath, findLinkedFile, getGitVersion, getJavaVersion, getMavenVersion, tryWhich } from '@bloomreach/cli-utils';
 import { ListrContext, ListrTaskWrapper } from 'listr';
 
+import { BrdCommand } from '../../brd-command';
+
 interface SetupFlags extends EtFlags {
   name: string;
 }
 
-export default class Setup extends EtCommand<SetupFlags> {
+export default class Setup extends BrdCommand<SetupFlags> {
   static description = 'Setup the Bloomreach environment';
 
   static examples = [
@@ -15,7 +17,7 @@ export default class Setup extends EtCommand<SetupFlags> {
   ];
 
   static flags = {
-    ...EtCommand.flags,
+    ...BrdCommand.flags,
     // name: flags.string({ char: 'n', description: 'name to print' }),
   };
 

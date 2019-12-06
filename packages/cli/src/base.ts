@@ -5,10 +5,10 @@ import * as convict from 'convict';
 import * as Listr from 'listr';
 import * as path from 'path';
 
+import defaultSchema from './schema';
+
 // Use the forked version of default listr renderer
 const UpdateRenderer = require('listr-update-renderer');
-
-import defaultConfig from './config/schema';
 
 export interface EtFlags {
   logLevel: 'error' | 'warn' | 'info' | 'debug';
@@ -24,7 +24,7 @@ export interface EtContext<F extends EtFlags> {
   };
 }
 
-export abstract class EtCommand<F extends EtFlags> extends Command {
+export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
   static flags = {
     logLevel: flags.string({
       description: 'define the verbosity of ET logging',
@@ -49,7 +49,7 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
     const configFromConfigDir = path.resolve(this.config.configDir, configFile);
     const configFromProjectDir = path.resolve(this.config.root, configFile);
 
-    const configConvict = convict<object>(defaultConfig);
+    const configConvict = convict<object>(this.getDefaultConfig());
     await this.loadConvictConfiguration(configConvict, configFromConfigDir);
     await this.loadConvictConfiguration(configConvict, configFromProjectDir);
 
@@ -94,6 +94,10 @@ export abstract class EtCommand<F extends EtFlags> extends Command {
 
   protected getContext(): EtContext<F> {
     return this.ctx;
+  }
+
+  protected getDefaultConfig(): string | object {
+    return defaultSchema;
   }
 
   private async loadConvictConfiguration(configConvict: convict.Config<any>, configDir: string) {

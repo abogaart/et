@@ -34,7 +34,6 @@ const cfg = {
   configDir: fixturesPath('user-dir'),
   root: fixturesPath('project-dir')
 } as IConfig;
-const defaultCfg = { ...cfg, root: '', configDir: '' };
 
 describe('base command', () => {
   describe('init', () => {
@@ -101,7 +100,7 @@ describe('base command', () => {
 
   describe('runTask', () => {
     it('runs a task', async () => {
-      const cmd = new BaseTestCommand([], defaultCfg);
+      const cmd = new BaseTestCommand([], { ...cfg, root: '', configDir: '' });
       await cmd.init();
       await cmd.runTask(async (ctx: EtContext<TestFlags>) => {
         expect(ctx).to.equal(cmd.context);
@@ -111,7 +110,7 @@ describe('base command', () => {
 
   describe('runTasks', () => {
     it('runs Listr tasks', async () => {
-      const cmd = new BaseTestCommand([], defaultCfg);
+      const cmd = new BaseTestCommand([], { ...cfg, root: '', configDir: '' });
       await cmd.init();
 
       const tasks = [
@@ -126,7 +125,7 @@ describe('base command', () => {
     });
 
     it('generates options from a function if argument is a function', async () => {
-      const cmd = new BaseTestCommand([], defaultCfg);
+      const cmd = new BaseTestCommand([], { ...cfg, root: '', configDir: '' });
       await cmd.init();
 
       const tasks = [{ title: 'task 1', task:  jest.fn() }];

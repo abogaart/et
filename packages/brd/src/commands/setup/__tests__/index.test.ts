@@ -1,5 +1,13 @@
 import { taskError, Tasks } from '@bloomreach/cli-tasks';
-import { checkPathExists, detectJavaPath, findLinkedFile, getGitVersion, getJavaVersion, getMavenVersion, tryWhich } from '@bloomreach/cli-utils';
+import {
+  checkPathExists,
+  detectJavaPath,
+  findLinkedFile,
+  getGitVersion,
+  getJavaVersion,
+  getMavenVersion,
+  tryWhich
+} from '@bloomreach/cli-utils';
 import { jestExpect } from '@bloomreach/test-utils';
 import { test } from '@oclif/test';
 

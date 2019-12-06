@@ -8,4 +8,5 @@ export class TestCommand<Flags extends EtFlags> extends EtCommand<Flags> {
   get context() {
     return this.getContext();
   }
+
 }
