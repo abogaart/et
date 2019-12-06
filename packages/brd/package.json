@@ -1,0 +1,73 @@
+{
+  "name": "@bloomreach/brd",
+  "version": "0.0.0",
+  "description": "CLI for Bloomreach developers",
+  "author": "Arthur Bogaart @abogaart",
+  "bin": {
+    "brd": "./bin/run"
+  },
+  "bugs": "https://github.com/abogaart/et/issues",
+  "dependencies": {
+    "@bloomreach/cli": "^0",
+    "@bloomreach/cli-tasks": "^0",
+    "@bloomreach/cli-utils": "^0",
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^2",
+    "listr": "^0.14.3",
+    "tslib": "^1"
+  },
+  "devDependencies": {
+    "@bloomreach/test-utils": "^0",
+    "@oclif/dev-cli": "^1",
+    "@oclif/test": "^1",
+    "@oclif/tslint": "^3",
+    "@types/chai": "^4",
+    "@types/node": "^12",
+    "chai": "^4",
+    "globby": "^10",
+    "jest": "^24",
+    "jest-environment-node": "^24",
+    "ts-jest": "^24",
+    "ts-node": "^8",
+    "tslint": "^5",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/abogaart/et",
+  "keywords": [
+    "oclif",
+    "bloomreach",
+    "cli",
+    "developer"
+  ],
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "brd",
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
+    "repositoryPrefix": "<%- repo %>/blob/master/packages/brd/<%- commandPath %>"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abogaart/et.git",
+    "directory": "packages/brd"
+  },
+  "scripts": {
+    "compile": "tsc -b --clean && tsc -b",
+    "compile:watch": "tsc -b --watch",
+    "test": "jest",
+    "test:ci": "jest --coverage --coverage-reporters=lcov"
+  },
+  "types": "lib/index.d.ts"
+}

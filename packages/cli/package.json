@@ -1,0 +1,62 @@
+{
+  "name": "@bloomreach/cli",
+  "version": "0.0.0",
+  "description": "CLI base classes",
+  "author": "Arthur Bogaart @abogaart",
+  "bugs": "https://github.com/abogaart/et/issues",
+  "dependencies": {
+    "@bloomreach/cli-utils": "^0",
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "convict": "^5.2.0",
+    "listr": "^0.14.3",
+    "listr-update-renderer": "https://github.com/abogaart/listr-update-renderer",
+    "tslib": "^1"
+  },
+  "devDependencies": {
+    "@bloomreach/test-utils": "^0",
+    "@oclif/dev-cli": "^1",
+    "@oclif/test": "^1",
+    "@oclif/tslint": "^3",
+    "@types/chai": "^4",
+    "@types/convict": "^4.2.1",
+    "@types/listr": "^0.14.2",
+    "@types/node": "^12",
+    "chai": "^4",
+    "globby": "^10",
+    "jest": "^24",
+    "jest-environment-node": "^24",
+    "ts-jest": "^24",
+    "ts-node": "^8",
+    "tslint": "^5",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/lib"
+  ],
+  "homepage": "https://github.com/abogaart/et",
+  "keywords": [
+    "oclif",
+    "bloomreach",
+    "cli",
+    "developer"
+  ],
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abogaart/et.git",
+    "directory": "packages/cli"
+  },
+  "scripts": {
+    "compile": "tsc -b --clean && tsc -b",
+    "compile:watch": "tsc -b --watch",
+    "lint": "tslint -p test -t stylish",
+    "test": "jest",
+    "test:ci": "jest --coverage --coverage-reporters=lcov"
+  },
+  "types": "lib/index.d.ts"
+}

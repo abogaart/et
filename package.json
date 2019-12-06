@@ -1,4 +1,8 @@
 {
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "name": "@bloomreach/et",
   "description": "Bloomreach Engineering Tooling",
   "version": "0.0.0",
@@ -7,39 +11,6 @@
     "et": "./bin/run"
   },
   "bugs": "https://github.com/abogaart/et/issues",
-  "dependencies": {
-    "@oclif/command": "^1",
-    "@oclif/config": "^1",
-    "@oclif/plugin-help": "^2",
-    "convict": "^5.2.0",
-    "execa": "^3.4.0",
-    "find-java-home": "^1.1.0",
-    "inquirer": "^7.0.0",
-    "listr": "^0.14.3",
-    "listr-inquirer": "^0.1.0",
-    "listr-update-renderer": "https://github.com/abogaart/listr-update-renderer",
-    "simple-git": "^1.126.0",
-    "tslib": "^1",
-    "which": "^2.0.2"
-  },
-  "devDependencies": {
-    "@oclif/dev-cli": "^1",
-    "@oclif/test": "^1",
-    "@oclif/tslint": "^3",
-    "@types/chai": "^4",
-    "@types/convict": "^4",
-    "@types/listr": "^0.14.2",
-    "@types/node": "^12",
-    "chai": "^4",
-    "globby": "^10",
-    "jest": "^24",
-    "jest-environment-node": "^24",
-    "normalize-newline": "^3.0.0",
-    "ts-jest": "^24",
-    "ts-node": "^8",
-    "tslint": "^5",
-    "typescript": "^3.3"
-  },
   "engines": {
     "node": ">=8.0.0"
   },
@@ -63,7 +34,8 @@
   },
   "repository": "abogaart/et",
   "scripts": {
-    "compile": "rm -rf lib && tsc -b",
+    "compile": "tsc -b --clean && tsc -b",
+    "compile:watch": "tsc -b --watch",
     "lint": "tslint -p test -t stylish",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",

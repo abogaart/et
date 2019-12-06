@@ -1,0 +1,49 @@
+{
+  "name": "@bloomreach/cli-utils",
+  "version": "0.0.0",
+  "description": "CLI utils",
+  "author": "Arthur Bogaart @abogaart",
+  "bugs": "https://github.com/abogaart/et/issues",
+  "dependencies": {
+    "execa": "^3.4.0",
+    "find-java-home": "^1.1.0",
+    "tslib": "^1",
+    "which": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12",
+    "jest": "^24",
+    "jest-environment-node": "^24",
+    "ts-jest": "^24",
+    "ts-node": "^8",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/lib"
+  ],
+  "homepage": "https://github.com/abogaart/et",
+  "keywords": [
+    "oclif",
+    "bloomreach",
+    "cli",
+    "utils",
+    "developer"
+  ],
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abogaart/et.git",
+    "directory": "packages/cli-utils"
+  },
+  "scripts": {
+    "compile": "tsc -b --clean && tsc -b",
+    "compile:watch": "tsc -b --watch",
+    "test": "jest",
+    "test:ci": "jest --coverage --coverage-reporters=lcov"
+  },
+  "types": "lib/index.d.ts"
+}

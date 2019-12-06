@@ -1,12 +1,14 @@
 {
-  "extends": "./tsconfig",
+  "extends": "./tsconfig.base",
   "compilerOptions": {
+    "sourceMap": true,
     "noEmit": true,
     "types": ["node", "jest"]
   },
   "include": [
     "src/**/*",
-    "test/**/*"
+    // "test/**/*",
+    "**/__tests__/*",
+    "**/__mocks__/*"
   ]
-
 }

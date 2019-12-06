@@ -1,0 +1,40 @@
+{
+  "name": "@bloomreach/test-utils",
+  "version": "0.0.0",
+  "description": "Test utils",
+  "author": "Arthur Bogaart @abogaart",
+  "bugs": "https://github.com/abogaart/et/issues",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "^12",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/lib"
+  ],
+  "homepage": "https://github.com/abogaart/et",
+  "keywords": [
+    "oclif",
+    "bloomreach",
+    "jest",
+    "test",
+    "utils",
+    "developer"
+  ],
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abogaart/et.git",
+    "directory": "packages/test-utils"
+  },
+  "scripts": {
+    "compile": "tsc -b --clean && tsc -b",
+    "compile:watch": "tsc -b --watch"
+  },
+  "types": "lib/index.d.ts"
+}

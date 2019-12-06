@@ -1,0 +1,51 @@
+{
+  "name": "@bloomreach/cli-tasks",
+  "version": "0.0.0",
+  "description": "CLI tasks",
+  "author": "Arthur Bogaart @abogaart",
+  "bugs": "https://github.com/abogaart/et/issues",
+  "dependencies": {
+    "listr": "^0.14",
+    "listr-inquirer": "^0.1"
+  },
+  "devDependencies": {
+    "@types/listr": "^0.14",
+    "@types/node": "^12",
+    "jest": "^24",
+    "jest-environment-node": "^24",
+    "ts-jest": "^24",
+    "ts-node": "^8",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/lib"
+  ],
+  "homepage": "https://github.com/abogaart/et",
+  "keywords": [
+    "oclif",
+    "bloomreach",
+    "cli",
+    "tasks",
+    "listr",
+    "inquirer",
+    "listr-inquirer",
+    "developer"
+  ],
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abogaart/et.git",
+    "directory": "packages/cli-tasks"
+  },
+  "scripts": {
+    "compile": "tsc -b --clean && tsc -b",
+    "compile:watch": "tsc -b --watch",
+    "test": "jest",
+    "test:ci": "jest --coverage --coverage-reporters=lcov"
+  },
+  "types": "lib/index.d.ts"
+}

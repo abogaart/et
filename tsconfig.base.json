@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "es2017",
+    "module": "commonjs",
+    "declaration": true,
+    "importHelpers": true,
+    "strict": true,
+    "outDir": "lib",
+    "declarationDir": "lib",
+    "baseUrl": ".",
+  }
+}
