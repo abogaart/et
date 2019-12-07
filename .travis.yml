@@ -5,6 +5,7 @@ node_js:
 cache: yarn
 
 script:
+  - yarn run lint
   - yarn run compile
   - ./packages/brd/bin/run --version
   - ./packages/brd/bin/run --help
