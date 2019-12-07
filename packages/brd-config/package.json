@@ -8,13 +8,7 @@
     "@bloomreach/cli": "^0"
   },
   "devDependencies": {
-    "@bloomreach/test-utils": "^0",
     "@types/node": "^12",
-    "jest": "^24",
-    "jest-environment-node": "^24",
-    "ts-jest": "^24",
-    "ts-node": "^8",
-    "tslint": "^5",
     "typescript": "^3.3"
   },
   "engines": {
@@ -25,11 +19,11 @@
   ],
   "homepage": "https://github.com/abogaart/et",
   "keywords": [
-    "oclif",
     "bloomreach",
     "brd",
     "cli",
     "config",
+    "schema",
     "developer"
   ],
   "license": "Apache-2.0",
@@ -41,9 +35,7 @@
   },
   "scripts": {
     "compile": "tsc -b --clean && tsc -b",
-    "compile:watch": "tsc -b --watch",
-    "test": "jest",
-    "test:ci": "jest --coverage --coverage-reporters=lcov"
+    "compile:watch": "tsc -b --watch"
   },
   "types": "lib/index.d.ts"
 }

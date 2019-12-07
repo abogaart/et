@@ -8,6 +8,7 @@ import * as path from 'path';
 import defaultSchema from './schema';
 
 // Use the forked version of default listr renderer
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const UpdateRenderer = require('listr-update-renderer');
 
 export interface EtFlags {
@@ -28,21 +29,22 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
   static flags = {
     logLevel: flags.string({
       description: 'define the verbosity of ET logging',
-      options: ['error', 'warn', 'info', 'debug']
+      options: ['error', 'warn', 'info', 'debug'],
     }),
     configFile: flags.string({
       description: 'define the name of the config file, e.g. <name>.json',
       default: 'et',
-    })
+    }),
   };
 
   public tasks: Listr.ListrTask[] = [];
 
   private ctx!: EtContext<F>;
 
-  async init() {
+  async init(): Promise<any> {
     await super.init();
 
+    // eslint-disable-next-line no-shadow
     const { args, flags } = this.parse(this.constructor as any);
 
     const configFile = `${flags.configFile}.json`;
@@ -59,11 +61,11 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
       config: {
         app: configConvict,
         cli: this.config,
-      }
+      },
     };
   }
 
-  public async runTask(task: (ctx: EtContext<F>) => PromiseLike<void>) {
+  public async runTask(task: (ctx: EtContext<F>) => PromiseLike<void>): Promise<void> {
     if (!this.ctx) {
       this.error('Init must be called before trying to access this.ctx');
     }
@@ -75,20 +77,21 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
 
   public async runTasks<Result>(
     generateTasks: (ctx: EtContext<F>) => Listr.ListrTask[],
-    options?: Listr.ListrOptions | ((ctx: EtContext<F>) => Listr.ListrOptions)
+    options?: Listr.ListrOptions | ((ctx: EtContext<F>) => Listr.ListrOptions),
   ): Promise<Result> {
     if (!this.ctx) {
       this.error('Init must be called before trying to access this.ctx');
     }
 
     const tasks = [...this.tasks, ...await generateTasks(this.ctx)];
-    this.debug('Running tasks ' + tasks);
+    this.debug(`Running tasks ${tasks}`);
     return new Listr(tasks, {
       renderer: UpdateRenderer,
       ...(process.env.NODE_ENV === 'test' && { renderer: 'verbose', nonTTYRenderer: 'verbose' }),
       ...(options && typeof options === 'function' ? options(this.ctx) : options),
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore This option is added by https://github.com/SamVerschueren/listr-verbose-renderer#options
-      dateFormat: false
+      dateFormat: false,
     }).run();
   }
 
@@ -96,11 +99,12 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
     return this.ctx;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   protected getDefaultConfig(): string | object {
     return defaultSchema;
   }
 
-  private async loadConvictConfiguration(configConvict: convict.Config<any>, configDir: string) {
+  private async loadConvictConfiguration(configConvict: convict.Config<any>, configDir: string): Promise<void> {
     this.debug(`Loading convict configuration from ${configDir}`);
     const exists = await checkPathExists(configDir);
     if (!exists) {

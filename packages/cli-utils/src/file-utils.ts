@@ -1,8 +1,8 @@
-const fs = require('fs');
+import * as fs from 'fs';
 
-export async function checkPathExists(filePath: string) {
+export async function checkPathExists(filePath: string): Promise<boolean> {
   return new Promise((resolve: any) => {
-    fs.access(filePath, fs.F_OK, (error: Error) => {
+    fs.access(filePath, fs.constants.F_OK, (error: Error | null) => {
       resolve(!error);
     });
   });

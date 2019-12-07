@@ -6,7 +6,7 @@ import {
   getGitVersion,
   getJavaVersion,
   getMavenVersion,
-  tryWhich
+  tryWhich,
 } from '@bloomreach/cli-utils';
 import { jestExpect } from '@bloomreach/test-utils';
 import { test } from '@oclif/test';
@@ -22,32 +22,36 @@ jest.mock('@bloomreach/cli-tasks');
 const actualCheckPathExists = jest.requireActual('@bloomreach/cli-utils').checkPathExists;
 checkPathExists.mockImplementation((path: string) => actualCheckPathExists(path));
 
-function mockChoices(index: number) {
-  Tasks.choice.mockImplementation((_message: string, choices: string[], next: (path: string) => Promise<void>) => next(choices[index]));
+function mockChoices(index: number): void {
+  Tasks.choice.mockImplementation((
+    _message: string,
+    choices: string[],
+    next: (path: string) => Promise<void>,
+  ) => next(choices[index]));
 }
 
-function mockTryWhich(...includes: string[]) {
-  tryWhich.mockImplementation(async (name: string) => includes.includes(name) ? `${name}.which` : null);
+function mockTryWhich(...includes: string[]): void {
+  tryWhich.mockImplementation(async (name: string) => (includes.includes(name) ? `${name}.which` : null));
 }
 
-function mockCustomPath(...ids: string[]) {
-  Tasks.customPath.mockImplementation((confirmMsg: string,
-                                       _pathLabel: string,
-                                       next: (path: string) => Promise<void>) => {
-    for (const id of ids) {
-      if (confirmMsg.includes(id)) {
-        return next(`/custom-path/${id}`);
-      }
-    }
-    return next('/custom-path');
+function mockCustomPath(...ids: string[]): void {
+  Tasks.customPath.mockImplementation((
+    confirmMsg: string,
+    _pathLabel: string,
+    next: (path: string) => Promise<void>,
+  ) => {
+    const pathId = ids.find((id: string) => confirmMsg.includes(id));
+    return pathId
+      ? next(`/custom-path/${pathId}`)
+      : next('/custom-path');
   });
 }
 
-function mockJavaPath(value: string | null) {
+function mockJavaPath(value: string | null): void {
   detectJavaPath.mockImplementation(async () => value);
 }
 
-function expectTaskError() {
+function expectTaskError(): void {
   jestExpect(taskError.mock.calls.length).toBe(1);
   jestExpect(taskError.mock.calls[0][0]).toMatchSnapshot();
 }
@@ -135,11 +139,9 @@ describe('setup -', () => {
       beforeEach(() => {
         mockJavaPath(null);
         Tasks.customPath.mockImplementation((_confirmMsg: string,
-                                             _pathLabel: string,
-                                             _next: (path: string) => Promise<void>,
-                                             error: () => Promise<void>) => {
-          return error();
-        });
+          _pathLabel: string,
+          _next: (path: string) => Promise<void>,
+          error: () => Promise<void>) => error());
       });
 
       test
@@ -162,7 +164,6 @@ describe('setup -', () => {
         .stderr()
         .command(['setup'])
         .it('prints an error if custom mvn path is not set', () => expectTaskError());
-
     });
   });
 });

@@ -1,0 +1,65 @@
+{
+  "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended"],
+  // "extends": [
+  //   "eslint:recommended",
+  //   "plugin:@typescript-eslint/eslint-recommended",
+  //   "plugin:@typescript-eslint/recommended"
+  // ],
+  "env": {
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["oclif"],
+  "parserOptions": {
+      "project": "./tsconfig.lint.json",
+      "sourceType": "module"
+  },
+  "ignorePatterns": ["**/schema.ts", "packages/*/lib", "node_modules"],
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.ts", "**/__mocks__/**.ts"
+      ],
+      "env": {
+        "jest": true,
+        "mocha": true
+      },
+      "globals": {
+        "fail": "readonly"
+      },
+      "plugins": ["jest"],
+      "rules": {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
+      }
+    }
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-param-reassign": "off",
+    "max-len": ["error", 120, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": false,
+      "ignoreRegExpLiterals": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "import/prefer-default-export": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".mjs", ".js", ".ts", ".json"]
+      }
+    },
+    "import/extensions": [
+      ".js",
+      ".mjs",
+      ".ts",
+      ".jsx"
+    ]
+  }
+}

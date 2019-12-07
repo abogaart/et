@@ -5,13 +5,14 @@
   "author": "Arthur Bogaart @abogaart",
   "bugs": "https://github.com/abogaart/et/issues",
   "dependencies": {
-    "execa": "^3.4.0",
-    "find-java-home": "^1.1.0",
+    "execa": "^3",
+    "find-java-home": "^1",
     "tslib": "^1",
-    "which": "^2.0.2"
+    "which": "^2"
   },
   "devDependencies": {
     "@types/node": "^12",
+    "@types/which": "^1",
     "jest": "^24",
     "jest-environment-node": "^24",
     "ts-jest": "^24",
@@ -26,7 +27,6 @@
   ],
   "homepage": "https://github.com/abogaart/et",
   "keywords": [
-    "oclif",
     "bloomreach",
     "cli",
     "utils",

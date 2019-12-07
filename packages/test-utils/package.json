@@ -4,8 +4,6 @@
   "description": "Test utils",
   "author": "Arthur Bogaart @abogaart",
   "bugs": "https://github.com/abogaart/et/issues",
-  "dependencies": {
-  },
   "devDependencies": {
     "@types/node": "^12",
     "typescript": "^3.3"
@@ -18,7 +16,6 @@
   ],
   "homepage": "https://github.com/abogaart/et",
   "keywords": [
-    "oclif",
     "bloomreach",
     "jest",
     "test",

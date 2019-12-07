@@ -1,6 +1,6 @@
-import Listr = require('listr');
-
 import { taskError } from '../error-tasks';
+
+import Listr = require('listr');
 
 const mockTask = {} as any as Listr.ListrTaskWrapper;
 

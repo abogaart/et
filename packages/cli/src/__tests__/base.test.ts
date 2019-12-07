@@ -1,18 +1,12 @@
 import { jestExpect } from '@bloomreach/test-utils';
 import { flags } from '@oclif/command';
 import { IConfig } from '@oclif/config';
-import { expect } from '@oclif/test';
 import * as Listr from 'listr';
-import * as path from 'path';
 
-import { TestCommand } from '../__mocks__/test-command';
+import { fixturesPath, TestCommand } from '../__mocks__';
 import { EtContext, EtFlags } from '../base';
 
 jest.mock('listr');
-
-const fixturesPath = (...paths) => {
-  return path.resolve(__dirname, '../__fixtures__', ...paths);
-};
 
 interface TestFlags extends EtFlags {
   name: string;
@@ -32,7 +26,7 @@ class BaseTestCommand extends TestCommand<TestFlags> {
 
 const cfg = {
   configDir: fixturesPath('user-dir'),
-  root: fixturesPath('project-dir')
+  root: fixturesPath('project-dir'),
 } as IConfig;
 
 describe('base command', () => {
@@ -41,22 +35,22 @@ describe('base command', () => {
       const cmd = new BaseTestCommand([], cfg);
       await cmd.init();
 
-      expect(cmd.context).to.not.be.null;
-      expect(cmd.context).to.not.be.undefined;
+      expect(cmd.context).not.toBeNull();
+      expect(cmd.context).not.toBeUndefined();
     });
 
     it('parses CLI args and flags', async () => {
       const cmd = new BaseTestCommand(['arg1', 'arg2', '--name', 'myName'], cfg);
       await cmd.init();
 
-      expect(cmd.context.args).to.not.be.null;
-      expect(cmd.context.args).to.not.be.undefined;
-      expect(cmd.context.args.testArg1).to.equal('arg1');
-      expect(cmd.context.args.testArg2).to.equal('arg2');
+      expect(cmd.context.args).not.toBeNull();
+      expect(cmd.context.args).not.toBeUndefined();
+      expect(cmd.context.args.testArg1).toEqual('arg1');
+      expect(cmd.context.args.testArg2).toEqual('arg2');
 
-      expect(cmd.context.flags).to.not.be.null;
-      expect(cmd.context.flags).to.not.be.undefined;
-      expect(cmd.context.flags.name).to.equal('myName');
+      expect(cmd.context.flags).not.toBeNull();
+      expect(cmd.context.flags).not.toBeUndefined();
+      expect(cmd.context.flags.name).toEqual('myName');
     });
 
     it('creates a default app and cli configuration', async () => {
@@ -64,19 +58,19 @@ describe('base command', () => {
       const cmd = new BaseTestCommand([], cliConfig);
       await cmd.init();
 
-      const config = cmd.context.config;
-      expect(config).to.not.be.null;
-      expect(config).to.not.be.undefined;
-      expect(config.app.get('installed')).to.be.false;
-      expect(config.app.get('version')).to.equal('0.0.0');
-      expect(config.cli).to.equal(cliConfig);
+      const { config } = cmd.context;
+      expect(config).not.toBeNull();
+      expect(config).not.toBeUndefined();
+      expect(config.app.get('installed')).toBe(false);
+      expect(config.app.get('version')).toEqual('0.0.0');
+      expect(config.cli).toEqual(cliConfig);
     });
 
     it('has a configurable config file name', async () => {
       const cmd = new BaseTestCommand(['--configFile', 'bet'], { ...cfg, root: fixturesPath() });
       await cmd.init();
 
-      expect(cmd.context.config.app.get('version')).to.equal('bet');
+      expect(cmd.context.config.app.get('version')).toEqual('bet');
     });
 
     it('reads from the user config dir', async () => {
@@ -84,8 +78,8 @@ describe('base command', () => {
       await cmd.init();
 
       const config = cmd.context.config.app;
-      expect(config.get('installed')).to.be.true;
-      expect(config.get('version')).to.equal('user-dir');
+      expect(config.get('installed')).toBe(true);
+      expect(config.get('version')).toEqual('user-dir');
     });
 
     it('reads from the project dir', async () => {
@@ -93,8 +87,8 @@ describe('base command', () => {
       await cmd.init();
 
       const config = cmd.context.config.app;
-      expect(config.get('installed')).to.be.true;
-      expect(config.get('version')).to.equal('project-dir');
+      expect(config.get('installed')).toBe(true);
+      expect(config.get('version')).toEqual('project-dir');
     });
   });
 
@@ -103,7 +97,7 @@ describe('base command', () => {
       const cmd = new BaseTestCommand([], { ...cfg, root: '', configDir: '' });
       await cmd.init();
       await cmd.runTask(async (ctx: EtContext<TestFlags>) => {
-        expect(ctx).to.equal(cmd.context);
+        expect(ctx).toEqual(cmd.context);
       });
     });
   });
@@ -114,21 +108,25 @@ describe('base command', () => {
       await cmd.init();
 
       const tasks = [
-        { title: 'task 1', task:  jest.fn() },
-        { title: 'task 2', task:  jest.fn() },
+        { title: 'task 1', task: jest.fn() },
+        { title: 'task 2', task: jest.fn() },
       ];
       const generateTasks = jest.fn().mockReturnValue(tasks);
       await cmd.runTasks(generateTasks, { renderer: 'silent', nonTTYRenderer: 'silent' });
 
       jestExpect(generateTasks).toHaveBeenCalledWith(cmd.context);
-      jestExpect(Listr).toHaveBeenCalledWith(tasks, { dateFormat: false, renderer: 'silent', nonTTYRenderer: 'silent' });
+      jestExpect(Listr).toHaveBeenCalledWith(tasks, {
+        dateFormat: false,
+        renderer: 'silent',
+        nonTTYRenderer: 'silent',
+      });
     });
 
     it('generates options from a function if argument is a function', async () => {
       const cmd = new BaseTestCommand([], { ...cfg, root: '', configDir: '' });
       await cmd.init();
 
-      const tasks = [{ title: 'task 1', task:  jest.fn() }];
+      const tasks = [{ title: 'task 1', task: jest.fn() }];
       const generateOptions = jest.fn().mockReturnValue({ testOption: true });
       await cmd.runTasks(() => tasks, generateOptions);
 

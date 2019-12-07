@@ -1,7 +1,7 @@
-const execa = require('execa');
-jest.mock('execa');
-
+import * as execa from 'execa';
 import { getGitVersion, getJavaVersion, getMavenVersion } from '../version-utils';
+
+jest.mock('execa');
 
 describe('version utils', () => {
   describe('getJavaVersion', () => {

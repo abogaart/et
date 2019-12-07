@@ -1,3 +1,5 @@
-// tslint:disable-next-line:no-string-literal
+interface JestEnv {
+  jestExcept: any;
+}
 const g = global as any;
-export const jestExpect = g.jestExpect;
+export const { jestExpect } = g;

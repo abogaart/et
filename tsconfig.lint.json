@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base",
+  "files": ["*.ts"],
+  "include": ["packages/*/src"],
+  "exclude": ["node_modules", "packages/*/src/lib"],
+  "references": [
+    { "path": "./packages/brd" },
+    { "path": "./packages/cli" },
+    { "path": "./packages/cli-tasks" },
+    { "path": "./packages/cli-utils" },
+    { "path": "./packages/test-utils" }
+  ]
+}

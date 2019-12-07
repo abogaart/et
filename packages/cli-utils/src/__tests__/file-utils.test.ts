@@ -3,20 +3,22 @@ import * as path from 'path';
 
 import { checkPathExists, findLinkedFile } from '../file-utils';
 
-function createLink(target: string, link: string) {
+function isLink(link: string): boolean {
   try {
     const stat = fs.lstatSync(link);
-    if (stat.isSymbolicLink()) {
-      return;
-    }
-  // tslint:disable-next-line:no-unused
-  } catch (e) {
+    return stat.isSymbolicLink();
+  } catch (ignore) {
+    return false;
   }
-
-  fs.symlinkSync(target, link);
 }
 
-function removeLink(link: string) {
+function createLink(target: string, link: string): void {
+  if (!isLink(link)) {
+    fs.symlinkSync(target, link);
+  }
+}
+
+function removeLink(link: string): void {
   fs.unlinkSync(link);
 }
 

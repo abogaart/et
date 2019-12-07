@@ -7,6 +7,6 @@ export default {
   version: {
     doc: 'The installed version',
     format: String,
-    default: '0.0.0'
+    default: '0.0.0',
   },
 };

@@ -1,6 +1,6 @@
-const listrInquirer = require('listr-inquirer');
-
 import { Tasks } from '../setup-tasks';
+
+import listrInquirer = require('listr-inquirer');
 
 jest.mock('listr-inquirer');
 
@@ -28,7 +28,6 @@ describe('setup tasks', () => {
 
       expect(next).toHaveBeenCalledWith('return-value');
     });
-
   });
 
   it('confirm', () => {
@@ -47,7 +46,7 @@ describe('setup tasks', () => {
 
       await Tasks.customPath('confirm-msg', 'path-label', next, error);
 
-      [config, done] = listrInquirer.mock.calls[0];
+      [[config, done]] = listrInquirer.mock.calls;
     });
 
     it('starts with a confirmation', async () => {

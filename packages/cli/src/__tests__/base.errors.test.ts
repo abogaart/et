@@ -1,14 +1,9 @@
 import * as convict from 'convict';
-import * as path from 'path';
 
-import { TestCommand } from '../__mocks__/test-command';
+import { fixturesPath, TestCommand } from '../__mocks__';
 
 jest.mock('convict');
 const mockConvict = convict as any as jest.Mock;
-
-const fixturesPath = (...paths) => {
-  return path.resolve(__dirname, '../__fixtures__', ...paths);
-};
 
 describe('base command', () => {
   describe('init', () => {
@@ -24,12 +19,12 @@ describe('base command', () => {
 
       cmd = new TestCommand([], {
         root: '',
-        configDir: fixturesPath('user-dir')
+        configDir: fixturesPath('user-dir'),
       } as any);
     });
 
     it('errors if it can not load an existing configuration file', async () => {
-      convictConfig.loadFile = () => { throw new Error('File not found'); };
+      convictConfig.loadFile = (): void => { throw new Error('File not found'); };
       try {
         await cmd.init();
         fail('should have thrown an error');
@@ -39,7 +34,7 @@ describe('base command', () => {
     });
 
     it('errors if the loaded configuration is not valid', async () => {
-      convictConfig.validate = () => { throw new Error('Config not valid'); };
+      convictConfig.validate = (): void => { throw new Error('Config not valid'); };
       try {
         await cmd.init();
         fail('should have thrown an error');

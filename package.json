@@ -5,44 +5,39 @@
   ],
   "name": "@bloomreach/et",
   "description": "Bloomreach Engineering Tooling",
-  "version": "0.0.0",
   "author": "Arthur Bogaart @abogaart",
-  "bin": {
-    "et": "./bin/run"
-  },
   "bugs": "https://github.com/abogaart/et/issues",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2",
+    "@typescript-eslint/parser": "^2",
+    "eslint": "^6",
+    "eslint-config-airbnb-base": "^14",
+    "eslint-formatter-pretty": "^3",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-jest": "^23",
+    "eslint-plugin-oclif": "^0"
+  },
   "engines": {
     "node": ">=8.0.0"
   },
-  "files": [
-    "/bin",
-    "/lib",
-    "/oclif.manifest.json"
-  ],
   "homepage": "https://github.com/abogaart/et",
   "keywords": [
-    "oclif"
+    "bloomreach",
+    "oclif",
+    "cli",
+    "tools",
+    "developer"
   ],
   "license": "Apache-2.0",
-  "main": "lib/index.js",
-  "oclif": {
-    "commands": "./lib/commands",
-    "bin": "et",
-    "plugins": [
-      "@oclif/plugin-help"
-    ]
-  },
   "repository": "abogaart/et",
   "scripts": {
-    "compile": "tsc -b --clean && tsc -b",
+    "compile:clean": "tsc -b --clean && tsc -b",
+    "compile": "tsc -b",
     "compile:watch": "tsc -b --watch",
-    "lint": "tslint -p test -t stylish",
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "tslint -p test -t stylish",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "lint": "eslint . --ext .ts --format=pretty",
+    "posttest": "yarn run lint",
     "test": "jest",
-    "test:ci": "jest --coverage --coverage-reporters=lcov",
-    "version": "oclif-dev readme && git add README.md"
+    "test:ci": "jest --coverage --coverage-reporters=lcov"
   },
   "types": "lib/index.d.ts"
 }

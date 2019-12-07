@@ -9,10 +9,8 @@ export const Tasks = {
         name: 'choice',
         message,
         choices,
-      }
-    ], async (answers: any) => {
-      return next(answers.choice);
-    });
+      },
+    ], async (answers: any) => next(answers.choice));
   },
 
   confirm(message: string) {
@@ -23,7 +21,11 @@ export const Tasks = {
     };
   },
 
-  async customPath(confirmMsg: string, pathLabel: string, next: (path: string) => Promise<void>, error: () => Promise<void>) {
+  async customPath(
+    confirmMsg: string,
+    pathLabel: string,
+    next: (path: string) => Promise<void>,
+    error: () => Promise<void>) {
     return listrInquirer([
       Tasks.confirm(confirmMsg),
       {
@@ -36,12 +38,10 @@ export const Tasks = {
             return path.isAbsolute(str) || 'Path should be absolute';
           }
           return 'Value is required';
-        }
-      }
-    ], async (answers: any) => {
-      return answers.continue === false
-        ? error()
-        : next(answers.customPath.trim());
-    });
+        },
+      },
+    ], async (answers: any) => (answers.continue === false
+      ? error()
+      : next(answers.customPath.trim())));
   },
 };

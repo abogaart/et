@@ -1,12 +1,11 @@
-const which = require('which');
-jest.mock('which');
-
-const findJavaHome = require('find-java-home');
-jest.mock('find-java-home');
-
-const path = require('path');
+import * as which from 'which';
+import * as findJavaHome from 'find-java-home';
+import * as path from 'path';
 
 import { detectJavaPath, tryWhich } from '../detect-utils';
+
+jest.mock('which');
+jest.mock('find-java-home');
 
 describe('detect utils', () => {
   describe('tryWhich', () => {
@@ -18,7 +17,6 @@ describe('detect utils', () => {
     it('returns which lookup result', async () => {
       which.mockImplementation(() => 'found');
       expect(await tryWhich('boom')).toBe('found');
-
     });
   });
 

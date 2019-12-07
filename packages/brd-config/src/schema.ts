@@ -6,21 +6,21 @@ export default {
     path: {
       doc: 'The path to the git executable, absolute or relative in case of a global symlink',
       format: String,
-      default: 'git'
-    }
+      default: 'git',
+    },
   },
   java: {
     path: {
       doc: 'The path to the java executable, absolute or relative in case of a global symlink',
       format: String,
-      default: 'java'
-    }
+      default: 'java',
+    },
   },
   mvn: {
     path: {
       doc: 'The path to the maven executable, absolute or relative in case of a global symlink',
       format: String,
-      default: 'mvn'
-    }
-  }
+      default: 'mvn',
+    },
+  },
 };

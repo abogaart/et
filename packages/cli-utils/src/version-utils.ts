@@ -1,4 +1,4 @@
-const execa = require('execa');
+import * as execa from 'execa';
 
 export async function getJavaVersion(path: string): Promise<string | null> {
   try {
@@ -7,7 +7,6 @@ export async function getJavaVersion(path: string): Promise<string | null> {
     if (out.startsWith('java version')) {
       return out.split('\n')[0].split(' ')[2].replace(/"/g, '');
     }
-  // tslint:disable-next-line:no-unused
   } catch (e) {}
 
   return null;
@@ -19,7 +18,6 @@ export async function getGitVersion(path: string): Promise<string | null> {
     if (stdout.startsWith('git version')) {
       return stdout.split(' ')[2];
     }
-  // tslint:disable-next-line:no-unused
   } catch (e) {}
 
   return null;
@@ -32,7 +30,6 @@ export async function getMavenVersion(path: string): Promise<string | null> {
     if (out.startsWith('Apache Maven')) {
       return out.split('\n')[0].split(' ')[2];
     }
-  // tslint:disable-next-line:no-unused
   } catch (e) {}
 
   return null;

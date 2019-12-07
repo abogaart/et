@@ -1,6 +1,8 @@
-import { EtCommand, EtFlags } from '@bloomreach/cli';
+import { EtFlags } from '@bloomreach/cli';
 import { taskError, Tasks } from '@bloomreach/cli-tasks';
-import { detectJavaPath, findLinkedFile, getGitVersion, getJavaVersion, getMavenVersion, tryWhich } from '@bloomreach/cli-utils';
+import {
+  detectJavaPath, findLinkedFile, getGitVersion, getJavaVersion, getMavenVersion, tryWhich,
+} from '@bloomreach/cli-utils';
 import { ListrContext, ListrTaskWrapper } from 'listr';
 
 import { BrdCommand } from '../../brd-command';
@@ -21,7 +23,7 @@ export default class Setup extends BrdCommand<SetupFlags> {
     // name: flags.string({ char: 'n', description: 'name to print' }),
   };
 
-  async run() {
+  async run(): Promise<any> {
     const { app } = this.getContext().config;
 
     if (app.get('installed')) {
@@ -37,8 +39,8 @@ export default class Setup extends BrdCommand<SetupFlags> {
       const tasks = [
         {
           title: 'Detect git executable',
-          task: async (listrCtx: ListrContext, task: ListrTaskWrapper) => {
-            const next = async (path: string) => {
+          task: async (listrCtx: ListrContext, task: ListrTaskWrapper): Promise<void> => {
+            const next = async (path: string): Promise<void> => {
               const gitVersion = await getGitVersion(path);
               if (gitVersion === null) {
                 taskError(`Failed to verify git executable at '${path}'`, task, this);
@@ -54,7 +56,7 @@ export default class Setup extends BrdCommand<SetupFlags> {
               return Tasks.choice(
                 'How should the git command be invoked?',
                 ['git', gitPath, findLinkedFile(gitPath)],
-                next
+                next,
               );
             }
 
@@ -63,13 +65,13 @@ export default class Setup extends BrdCommand<SetupFlags> {
               'Absolute git path:',
               next, async () => taskError('Setup failed, please install Git first. For more info see https://www.atlassian.com/git/tutorials/install-git', task, this),
             );
-          }
+          },
         },
         {
           title: 'Detect Java executable',
-          enabled: (listrCtx: ListrContext) => listrCtx.java,
-          task:  async (listrCtx: ListrContext, task: ListrTaskWrapper) => {
-            const next = async (path: string) => {
+          enabled: (listrCtx: ListrContext): boolean => !!listrCtx.java,
+          task: async (listrCtx: ListrContext, task: ListrTaskWrapper): Promise<void> => {
+            const next = async (path: string): Promise<void> => {
               const javaVersion = await getJavaVersion(path);
               if (javaVersion === null) {
                 taskError(`Failed to verify java executable at '${path}'`, task, this);
@@ -85,7 +87,7 @@ export default class Setup extends BrdCommand<SetupFlags> {
               return Tasks.choice(
                 'How should the java command be invoked?',
                 ['java', javaPath, findLinkedFile(javaPath)],
-                next
+                next,
               );
             }
 
@@ -100,13 +102,13 @@ export default class Setup extends BrdCommand<SetupFlags> {
               next,
               async () => taskError('Setup failed, please install Java first. For more info see https://www.java.com/en/download/help/download_options.xml', task, this),
             );
-          }
+          },
         },
         {
           title: 'Detect Maven',
-          enabled: (listrCtx: ListrContext) => listrCtx.maven,
-          task: async (_listrCtx: ListrContext, task: ListrTaskWrapper) => {
-            const next = async (path: string) => {
+          enabled: (listrCtx: ListrContext): boolean => !!listrCtx.maven,
+          task: async (_listrCtx: ListrContext, task: ListrTaskWrapper): Promise<ListrContext> => {
+            const next = async (path: string): Promise<void> => {
               const mvnVersion = await getMavenVersion(path);
               if (mvnVersion === null) {
                 taskError(`Failed to verify Maven executable at '${path}'`, task, this);
@@ -116,12 +118,12 @@ export default class Setup extends BrdCommand<SetupFlags> {
               task.title = `Maven detected at '${path}' (v${mvnVersion})`;
             };
 
-            let mvnPath = await tryWhich('mvn');
+            const mvnPath = await tryWhich('mvn');
             if (mvnPath !== null) {
               return Tasks.choice(
                 'How should the mvn command be invoked?',
                 ['mvn', mvnPath, findLinkedFile(mvnPath)],
-                next
+                next,
               );
             }
 
@@ -131,7 +133,7 @@ export default class Setup extends BrdCommand<SetupFlags> {
               next,
               async () => taskError('Setup failed, please install Maven first. For more info see https://maven.apache.org/install.html', task, this),
             );
-          }
+          },
         },
       ];
       await this.runTasks(() => tasks);
@@ -140,5 +142,4 @@ export default class Setup extends BrdCommand<SetupFlags> {
       this.log(`\nSetup has successfully finished\n${app}`);
     }
   }
-
 }
