@@ -1,17 +1,12 @@
 {
   "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended"],
-  // "extends": [
-  //   "eslint:recommended",
-  //   "plugin:@typescript-eslint/eslint-recommended",
-  //   "plugin:@typescript-eslint/recommended"
-  // ],
   "env": {
     "node": true
   },
   "parser": "@typescript-eslint/parser",
   "plugins": ["oclif"],
   "parserOptions": {
-      "project": "./tsconfig.lint.json",
+      "project": ["./tsconfig.lint.json", "./packages/*/tsconfig.json"],
       "sourceType": "module"
   },
   "ignorePatterns": ["**/schema.ts", "packages/*/lib", "node_modules"],
