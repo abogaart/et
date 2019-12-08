@@ -54,6 +54,9 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
+      "eslint-import-resolver-lerna": {
+        "packages": "./packages"
+      },
       "typescript": {
         "directory": "./packages/*/tsconfig.json"
       }
