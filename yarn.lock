@@ -1342,7 +1342,7 @@ date-fns@^1.27.2:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
-debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
+debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
@@ -1614,11 +1614,11 @@ eslint-import-resolver-typescript@^2.0.0:
     tsconfig-paths "^3.9.0"
 
 eslint-module-utils@^2.4.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/eslint-module-utils/-/eslint-module-utils-2.4.1.tgz#7b4675875bf96b0dbf1b21977456e5bb1f5e018c"
-  integrity sha512-H6DOj+ejw7Tesdgbfs4jeS4YMFrT8uI8xwd1gtQqXssaR0EQ26L+2O/w6wkYFy2MymON0fTwHmXBvvfLNZVZEw==
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-module-utils/-/eslint-module-utils-2.5.0.tgz#cdf0b40d623032274ccd2abd7e64c4e524d6e19c"
+  integrity sha512-kCo8pZaNz2dsAW7nCUjuVoI11EBXXpIzfNxmaoLhXoRDOnqXLC4iSGVRdZPhOitfbdEfMEfKOiENaK6wDPZEGw==
   dependencies:
-    debug "^2.6.8"
+    debug "^2.6.9"
     pkg-dir "^2.0.0"
 
 eslint-plugin-import@^2:
@@ -1653,9 +1653,9 @@ eslint-plugin-oclif@^0:
     "@typescript-eslint/experimental-utils" "^2.0.0"
 
 eslint-rule-docs@^1.1.5:
-  version "1.1.168"
-  resolved "https://registry.yarnpkg.com/eslint-rule-docs/-/eslint-rule-docs-1.1.168.tgz#e74a1f656a60c73e81a88c98b127014a4e7dcc6a"
-  integrity sha512-vOVvI12rdns1TBiPIHkS7T52J13UMIN2B6f3+DZW+GlzMML+zK/SJbBBIWUDQ5fykiTDyYxlWDxKAYLWXsUUbw==
+  version "1.1.169"
+  resolved "https://registry.yarnpkg.com/eslint-rule-docs/-/eslint-rule-docs-1.1.169.tgz#12568ee08df4ca24d1f42071c0fe00fc18fbece9"
+  integrity sha512-PpMTVu3tqW/g9bPUS01mQVfSxYmftA1DMmbkf3Wct2LaKDmUfoBV8t1IGwL9ESft3wvKcfkOLglRDAZRLkkVzA==
 
 eslint-scope@^5.0.0:
   version "5.0.0"
@@ -1961,6 +1961,14 @@ fb-watchman@^2.0.0:
   integrity sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
   dependencies:
     bser "2.1.1"
+
+figures@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/figures/-/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"
+  integrity sha1-y+Hjr/zxzUS4DK3+0o3Hk6lwHS4=
+  dependencies:
+    escape-string-regexp "^1.0.5"
+    object-assign "^4.1.0"
 
 figures@^2.0.0:
   version "2.0.0"
@@ -3315,7 +3323,21 @@ listr-silent-renderer@^1.1.1:
   resolved "https://registry.yarnpkg.com/listr-silent-renderer/-/listr-silent-renderer-1.1.1.tgz#924b5a3757153770bf1a8e3fbf74b8bbf3f9242e"
   integrity sha1-kktaN1cVN3C/Go4/v3S4u/P5JC4=
 
-listr-update-renderer@^0.5.0, "listr-update-renderer@https://github.com/abogaart/listr-update-renderer":
+listr-update-renderer@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/listr-update-renderer/-/listr-update-renderer-0.5.0.tgz#4ea8368548a7b8aecb7e06d8c95cb45ae2ede6a2"
+  integrity sha512-tKRsZpKz8GSGqoI/+caPmfrypiaq+OQCbd+CovEC24uk1h952lVj5sC7SqyFUm+OaJ5HN/a1YLt5cit2FMNsFA==
+  dependencies:
+    chalk "^1.1.3"
+    cli-truncate "^0.2.1"
+    elegant-spinner "^1.0.1"
+    figures "^1.7.0"
+    indent-string "^3.0.0"
+    log-symbols "^1.0.2"
+    log-update "^2.3.0"
+    strip-ansi "^3.0.1"
+
+"listr-update-renderer@https://github.com/abogaart/listr-update-renderer":
   version "0.5.0"
   resolved "https://github.com/abogaart/listr-update-renderer#d7de55004d367f0c4731fb4a85c2dc1dd1bc10c4"
   dependencies:
@@ -3787,9 +3809,9 @@ normalize-path@^2.1.1:
     remove-trailing-separator "^1.0.1"
 
 npm-bundled@^1.0.1:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.0.6.tgz#e7ba9aadcef962bb61248f91721cd932b3fe6bdd"
-  integrity sha512-8/JCaftHwbd//k6y2rEWp6k1wxVfpFzB6t1p825+cUb7Ym2XQfhwIC5KwhrvzZRJu+LtDE585zVaS32+CGtf0g==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.1.0.tgz#2e8fdb7e69eff2df963937b696243316537c284b"
+  integrity sha512-ez6dcKBFNo4FvlMqscBEFUum6M2FTLW5grqm3DyBKB5XOyKVCeeWvAuoZtbmW/5Cv8EM2bQUOA6ufxa/TKVN0g==
 
 npm-packlist@^1.1.6:
   version "1.4.6"
@@ -5316,9 +5338,9 @@ typescript@^3.3:
   integrity sha512-Mcr/Qk7hXqFBXMN7p7Lusj1ktCBydylfQM/FZCk5glCNQJrCUKPkMHdo9R0MTFWsC/4kPFvDS0fDPvukfCkFsw==
 
 uglify-js@^3.1.4:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.1.tgz#35c7de17971a4aa7689cd2eae0a5b39bb838c0c5"
-  integrity sha512-pnOF7jY82wdIhATVn87uUY/FHU+MDUdPLkmGFvGoclQmeu229eTkbG5gjGGBi3R7UuYYSEeYXY/TTY5j2aym2g==
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.2.tgz#cb1a601e67536e9ed094a92dd1e333459643d3f9"
+  integrity sha512-uhRwZcANNWVLrxLfNFEdltoPNhECUR3lc+UdJoG9CBpMcSnKyWA94tc3eAujB1GcMY5Uwq8ZMp4qWpxWYDQmaA==
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"

@@ -7,5 +7,5 @@ lib/
 /package-lock.json
 /tmp
 node_modules
-.tsbuildinfo
+*.tsbuildinfo
 !.vscode
