@@ -59,12 +59,12 @@
           ".json"
         ],
         "paths": [
-          "./packages/brd/src",
+          "./packages/brd",
           "./packages/brd-config",
-          "./packages/cli/src",
-          "./packages/cli-tasks/src",
-          "./packages/cli-utils/src",
-          "./packages/test-utils/src"
+          "./packages/cli",
+          "./packages/cli-tasks",
+          "./packages/cli-utils",
+          "./packages/test-utils"
         ]
       }
     },
