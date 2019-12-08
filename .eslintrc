@@ -50,21 +50,13 @@
     "import/prefer-default-export": "off"
   },
   "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".mjs",
-          ".ts",
-          ".json"
-        ]
-      }
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
-    "import/extensions": [
-      ".js",
-      ".mjs",
-      ".ts",
-      ".jsx"
-    ]
+    "import/resolver": {
+      "typescript": {
+        "directory": "./packages/*/tsconfig.json"
+      }
+    }
   }
 }

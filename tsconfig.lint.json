@@ -1,8 +1,8 @@
 {
-  "extends": "./tsconfig.base",
+  // "extends": "./tsconfig.base",
   "files": ["*.ts"],
   "include": ["packages/*/src"],
-  "exclude": ["packages/*/src/lib"],
+  "exclude": ["node_modules", "packages/*/src/lib"],
   "references": [
     { "path": "./packages/brd" },
     { "path": "./packages/cli" },

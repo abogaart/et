@@ -13,6 +13,7 @@
     "eslint": "^6",
     "eslint-config-airbnb-base": "^14",
     "eslint-formatter-pretty": "^3",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2",
     "eslint-plugin-jest": "^23",
     "eslint-plugin-oclif": "^0"
