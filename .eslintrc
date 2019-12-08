@@ -52,7 +52,20 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".mjs", ".js", ".ts", ".json"]
+        "extensions": [
+          ".js",
+          ".mjs",
+          ".ts",
+          ".json"
+        ],
+        "paths": [
+          "./packages/brd/src",
+          "./packages/brd-config",
+          "./packages/cli/src",
+          "./packages/cli-tasks/src",
+          "./packages/cli-utils/src",
+          "./packages/test-utils/src"
+        ]
       }
     },
     "import/extensions": [
