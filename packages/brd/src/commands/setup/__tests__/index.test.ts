@@ -171,7 +171,7 @@ describe('setup -', () => {
 describe('already installed', () => {
   test
     .stdout()
-    .command(['setup', '--configFile', 'test/__fixtures__/et-installed'])
+    .command(['setup', '--config', 'test/__fixtures__/et-installed'])
     .it('print merged config if already stalled', (ctx: any) => {
       jestExpect(ctx.stdout).toMatchSnapshot();
     });

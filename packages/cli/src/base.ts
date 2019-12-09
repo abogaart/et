@@ -12,8 +12,8 @@ import defaultSchema from './schema';
 const UpdateRenderer = require('listr-update-renderer');
 
 export interface EtFlags {
-  logLevel: 'error' | 'warn' | 'info' | 'debug';
-  configFile: string;
+  loglevel: 'error' | 'warn' | 'info' | 'debug';
+  config: string;
 }
 
 export interface EtContext<F extends EtFlags> {
@@ -27,11 +27,11 @@ export interface EtContext<F extends EtFlags> {
 
 export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
   static flags = {
-    logLevel: flags.string({
-      description: 'define the verbosity of ET logging',
+    loglevel: flags.string({
+      description: 'define the logging verbosity',
       options: ['error', 'warn', 'info', 'debug'],
     }),
-    configFile: flags.string({
+    config: flags.string({
       description: 'define the name of the config file, e.g. <name>.json',
       default: 'et',
     }),
@@ -47,7 +47,7 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
     // eslint-disable-next-line no-shadow
     const { args, flags } = this.parse(this.constructor as any);
 
-    const configFile = `${flags.configFile}.json`;
+    const configFile = `${flags.config}.json`;
     const configFromConfigDir = path.resolve(this.config.configDir, configFile);
     const configFromProjectDir = path.resolve(this.config.root, configFile);
 

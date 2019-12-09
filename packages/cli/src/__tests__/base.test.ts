@@ -67,7 +67,7 @@ describe('base command', () => {
     });
 
     it('has a configurable config file name', async () => {
-      const cmd = new BaseTestCommand(['--configFile', 'bet'], { ...cfg, root: fixturesPath() });
+      const cmd = new BaseTestCommand(['--config', 'bet'], { ...cfg, root: fixturesPath() });
       await cmd.init();
 
       expect(cmd.context.config.app.get('version')).toEqual('bet');

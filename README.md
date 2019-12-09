@@ -45,8 +45,8 @@ USAGE
 
 OPTIONS
   -n, --name=name                   name to print
-  --configFile=configFile           [default: et] define the name of the config file, e.g. <name>.json
-  --logLevel=error|warn|info|debug  define the verbosity of ET logging
+  --config=config                   [default: et] define the name of the config file, e.g. <name>.json
+  --loglevel=error|warn|info|debug  define the logging verbosity
 
 EXAMPLE
   $ et hello
