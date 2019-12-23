@@ -99,7 +99,6 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
     return this.ctx;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected getDefaultConfig(): string | object {
     return defaultSchema;
   }

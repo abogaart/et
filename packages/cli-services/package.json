@@ -1,34 +1,20 @@
 {
-  "name": "@bloomreach/brd",
+  "name": "@bloomreach/cli-services",
   "version": "0.0.0",
-  "description": "CLI for Bloomreach developers",
+  "description": "CLI services",
   "author": "Arthur Bogaart @abogaart",
-  "bin": {
-    "brd": "./bin/run"
-  },
   "bugs": "https://github.com/abogaart/et/issues",
   "dependencies": {
-    "@bloomreach/brd-config": "^0",
-    "@bloomreach/cli": "^0",
-    "@bloomreach/cli-services": "^0",
-    "@bloomreach/cli-tasks": "^0",
-    "@oclif/command": "^1",
-    "@oclif/config": "^1",
-    "@oclif/plugin-help": "^2",
-    "listr": "^0",
-    "tslib": "^1"
+    "@bloomreach/cli-utils": "^0",
+    "execa": "^3.4.0"
   },
   "devDependencies": {
-    "@bloomreach/cli-utils": "^0",
     "@bloomreach/test-utils": "^0",
-    "@oclif/dev-cli": "^1",
-    "@oclif/test": "^1",
-    "@types/chai": "^4",
     "@types/node": "^12",
-    "chai": "^4",
-    "globby": "^10",
+    "@types/source-map-support": "^0.5.0",
     "jest": "^24",
     "jest-environment-node": "^24",
+    "source-map-support": "^0.5.16",
     "ts-jest": "^24",
     "ts-node": "^8",
     "typescript": "^3.3"
@@ -37,31 +23,21 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "/bin",
-    "/lib",
-    "/oclif.manifest.json"
+    "/lib"
   ],
   "homepage": "https://github.com/abogaart/et",
   "keywords": [
-    "oclif",
     "bloomreach",
     "cli",
+    "services",
     "developer"
   ],
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "oclif": {
-    "commands": "./lib/commands",
-    "bin": "brd",
-    "plugins": [
-      "@oclif/plugin-help"
-    ],
-    "repositoryPrefix": "<%- repo %>/blob/master/packages/brd/<%- commandPath %>"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abogaart/et.git",
-    "directory": "packages/brd"
+    "directory": "packages/cli-services"
   },
   "scripts": {
     "compile": "tsc -b --clean && tsc -b",

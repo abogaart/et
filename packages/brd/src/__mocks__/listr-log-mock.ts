@@ -5,7 +5,7 @@
 import { log } from 'listr-verbose-renderer/lib/utils';
 
 export function mockListerLog(): void {
-  jest.mock('listr-verbose-renderer');
+  jest.mock('listr-verbose-renderer/lib/utils');
   log.mockImplementation((_cfg: any, message: 'string') => {
     process.stdout.write(`${message}\n`);
   });

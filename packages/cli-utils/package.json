@@ -5,7 +5,6 @@
   "author": "Arthur Bogaart @abogaart",
   "bugs": "https://github.com/abogaart/et/issues",
   "dependencies": {
-    "execa": "^3",
     "find-java-home": "^1",
     "tslib": "^1",
     "which": "^2"

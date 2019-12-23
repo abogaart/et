@@ -5,10 +5,13 @@
   "author": "Arthur Bogaart @abogaart",
   "bugs": "https://github.com/abogaart/et/issues",
   "dependencies": {
+    "@bloomreach/cli-services": "^0",
+    "@bloomreach/cli-utils": "^0",
     "listr": "^0",
     "listr-inquirer": "^0"
   },
   "devDependencies": {
+    "@bloomreach/test-utils": "^0",
     "@types/listr": "^0",
     "@types/node": "^12",
     "jest": "^24",

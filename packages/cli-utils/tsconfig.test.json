@@ -1,12 +1,3 @@
 {
-  "extends": "../../tsconfig.test",
-  "include": ["**/__tests__/*", "**/__mocks__/*"]
-  // "compilerOptions": {
-  //   "rootDir": "./src",
-  //   "outDir": "./lib"
-  // },
-  // "include": ["./src/**/*"],
-  // "exclude": ["**/__tests__/*", "**/__mocks__/*", "**/__fixtures__/*"],
-  // "references": [
-  //   { "path": "../apollo-codegen-flow" },
+  "extends": "../../tsconfig.test"
 }

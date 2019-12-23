@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`setup already installed print merged config if already stalled 1`] = `
+"The \\"brd\\" command is installed with the following properties
+{
+  \\"installed\\": true,
+  \\"version\\": \\"bet-installed\\",
+  \\"git\\": {
+    \\"path\\": \\"git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn\\"
+  }
+}
+"
+`;
+
+exports[`setup initial can select absolute path from global installed git, java and mvn executables 1`] = `
+"
+The \\"brd\\" command has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+git found at '/abs/path/to/git' (vgit-abs-version) [title changed]
+git found at '/abs/path/to/git' (vgit-abs-version) [completed]
+Detect java executable [started]
+java found at '/abs/path/to/java' (vjava-abs-version) [title changed]
+java found at '/abs/path/to/java' (vjava-abs-version) [completed]
+Detect mvn executable [started]
+mvn found at '/abs/path/to/mvn' (vmaven-abs-version) [title changed]
+mvn found at '/abs/path/to/mvn' (vmaven-abs-version) [completed]
+
+Setup has successfully finished
+{
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"/abs/path/to/git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"/abs/path/to/java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"/abs/path/to/mvn\\"
+  }
+}
+"
+`;
+
+exports[`setup initial can select symlink resolved absolute path from global installed git, java and mvn executables 1`] = `
+"
+The \\"brd\\" command has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+git found at '/symlink/path/to/git' (vgit-symlink-version) [title changed]
+git found at '/symlink/path/to/git' (vgit-symlink-version) [completed]
+Detect java executable [started]
+java found at '/symlink/path/to/java' (vjava-symlink-version) [title changed]
+java found at '/symlink/path/to/java' (vjava-symlink-version) [completed]
+Detect mvn executable [started]
+mvn found at '/symlink/path/to/mvn' (vmaven-symlink-version) [title changed]
+mvn found at '/symlink/path/to/mvn' (vmaven-symlink-version) [completed]
+
+Setup has successfully finished
+{
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"/symlink/path/to/git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"/symlink/path/to/java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"/symlink/path/to/mvn\\"
+  }
+}
+"
+`;
+
+exports[`setup initial finds global installed git, java and mvn executables 1`] = `
+"
+The \\"brd\\" command has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+git found at 'git' (vgit-global-version) [title changed]
+git found at 'git' (vgit-global-version) [completed]
+Detect java executable [started]
+java found at 'java' (vjava-global-version) [title changed]
+java found at 'java' (vjava-global-version) [completed]
+Detect mvn executable [started]
+mvn found at 'mvn' (vmaven-global-version) [title changed]
+mvn found at 'mvn' (vmaven-global-version) [completed]
+
+Setup has successfully finished
+{
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn\\"
+  }
+}
+"
+`;
+
+exports[`setup initial picks first path of git, java and mvn executables in default mode 1`] = `
+"
+The \\"brd\\" command has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+git found at 'git' (vgit-global-version) [title changed]
+git found at 'git' (vgit-global-version) [completed]
+Detect java executable [started]
+java found at 'java' (vjava-global-version) [title changed]
+java found at 'java' (vjava-global-version) [completed]
+Detect mvn executable [started]
+mvn found at 'mvn' (vmaven-global-version) [title changed]
+mvn found at 'mvn' (vmaven-global-version) [completed]
+
+Setup has successfully finished
+{
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"mvn\\"
+  }
+}
+"
+`;
+
+exports[`setup initial present option to set custom paths 1`] = `
+"
+The \\"brd\\" command has not been installed yet, starting initial setup of version 0.0.0
+
+Detect git executable [started]
+git found at '/custom-path/git' (vgit-custom-path-version) [title changed]
+git found at '/custom-path/git' (vgit-custom-path-version) [completed]
+Detect java executable [started]
+java found at '/custom-path/java' (vjava-custom-path-version) [title changed]
+java found at '/custom-path/java' (vjava-custom-path-version) [completed]
+Detect mvn executable [started]
+mvn found at '/custom-path/mvn' (vmvn-custom-path-version) [title changed]
+mvn found at '/custom-path/mvn' (vmvn-custom-path-version) [completed]
+
+Setup has successfully finished
+{
+  \\"installed\\": true,
+  \\"version\\": \\"0.0.0\\",
+  \\"git\\": {
+    \\"path\\": \\"/custom-path/git\\"
+  },
+  \\"java\\": {
+    \\"path\\": \\"/custom-path/java\\"
+  },
+  \\"mvn\\": {
+    \\"path\\": \\"/custom-path/mvn\\"
+  }
+}
+"
+`;
+
+exports[`setup initial prints an error if custom path is invalid 1`] = `"Failed to verify git executable at '/invalid/git/path', please ensure Git is properly installed. For more info see https://www.atlassian.com/git/tutorials/install-git"`;
+
+exports[`setup initial prints an error if custom path is invalid 2`] = `"Failed to verify java executable at '/invalid/java/path'. Please ensure Java is properly installed. For more info see https://www.java.com/en/download/help/download_options.xml"`;
+
+exports[`setup initial prints an error if custom path is invalid 3`] = `"Failed to verify mvn executable at '/invalid/maven/path'. Please ensure Maven is properly installed. For more info see https://maven.apache.org/install.html"`;

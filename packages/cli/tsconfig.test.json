@@ -1,4 +1,3 @@
 {
-  "extends": "../../tsconfig.test",
-  "include": ["**/__tests__/*", "**/__mocks__/*"]
+  "extends": "../../tsconfig.test"
 }
