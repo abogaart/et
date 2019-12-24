@@ -6,9 +6,3 @@ module.exports = {
   displayName: pack.name,
   name: pack.name
 };
-
-console.log({
-  ...baseConfig,
-  displayName: pack.name,
-  name: pack.name
-});
