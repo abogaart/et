@@ -1,4 +1,5 @@
 import { jestExpect } from '@bloomreach/test-utils';
+import * as cliUtilsModule from '@bloomreach/cli-utils';
 import { flags } from '@oclif/command';
 import { IConfig } from '@oclif/config';
 import * as Listr from 'listr';
@@ -22,6 +23,10 @@ class BaseTestCommand extends TestCommand<TestFlags> {
     { name: 'testArg1' },
     { name: 'testArg2' },
   ];
+
+  async testWriteGlobalConfigFile(): Promise<boolean> {
+    return super.writeGlobalConfigFile();
+  }
 }
 
 const cfg = {
@@ -132,6 +137,19 @@ describe('base command', () => {
 
       jestExpect(generateOptions).toHaveBeenCalledWith(cmd.context);
       jestExpect(Listr).toHaveBeenCalledWith(tasks, jestExpect.objectContaining({ testOption: true }));
+    });
+  });
+
+  describe('writeGlobalConfigFile', () => {
+    it('writes the "app" configuration to the OS global config dir', async () => {
+      const mockWriteJson = jest.spyOn(cliUtilsModule, 'writeJson').mockReturnValue(true);
+      const cmd = new BaseTestCommand([], { ...cfg, root: '', configDir: '' });
+      await cmd.init();
+
+      cmd.testWriteGlobalConfigFile();
+
+      const { config } = cmd.context;
+      expect(mockWriteJson).toHaveBeenCalledWith(config.env.globalConfigFile, config.app.getProperties());
     });
   });
 });

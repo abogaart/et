@@ -1,4 +1,4 @@
-import { checkPathExists } from '@bloomreach/cli-utils';
+import { checkPathExists, writeJson } from '@bloomreach/cli-utils';
 import Command, { flags } from '@oclif/command';
 import { IConfig } from '@oclif/config';
 import * as convict from 'convict';
@@ -22,6 +22,11 @@ export interface EtContext<F extends EtFlags> {
   config: {
     app: convict.Config<object>;
     cli: IConfig;
+    env: {
+      configFile: string;
+      globalConfigFile: string;
+      projectConfigFile: string;
+    };
   };
 }
 
@@ -48,12 +53,12 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
     const { args, flags } = this.parse(this.constructor as any);
 
     const configFile = `${flags.config}.json`;
-    const configFromConfigDir = path.resolve(this.config.configDir, configFile);
-    const configFromProjectDir = path.resolve(this.config.root, configFile);
+    const globalConfigFile = path.resolve(this.config.configDir, configFile);
+    const projectConfigFile = path.resolve(this.config.root, configFile);
 
     const configConvict = convict<object>(this.getDefaultConfig());
-    await this.loadConvictConfiguration(configConvict, configFromConfigDir);
-    await this.loadConvictConfiguration(configConvict, configFromProjectDir);
+    await this.loadConvictConfiguration(configConvict, globalConfigFile);
+    await this.loadConvictConfiguration(configConvict, projectConfigFile);
 
     this.ctx = {
       flags,
@@ -61,6 +66,11 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
       config: {
         app: configConvict,
         cli: this.config,
+        env: {
+          configFile,
+          globalConfigFile,
+          projectConfigFile,
+        },
       },
     };
   }
@@ -103,27 +113,31 @@ export abstract class EtCommand<F extends EtFlags | EtFlags> extends Command {
     return defaultSchema;
   }
 
-  private async loadConvictConfiguration(configConvict: convict.Config<any>, configDir: string): Promise<void> {
-    this.debug(`Loading convict configuration from ${configDir}`);
-    const exists = await checkPathExists(configDir);
+  protected async writeGlobalConfigFile(): Promise<boolean> {
+    return writeJson(this.ctx.config.env.globalConfigFile, this.ctx.config.app.getProperties());
+  }
+
+  private async loadConvictConfiguration(configConvict: convict.Config<any>, configFile: string): Promise<void> {
+    this.debug(`Loading convict configuration from ${configFile}`);
+    const exists = await checkPathExists(configFile);
     if (!exists) {
-      this.debug(`File ${configDir} does not exist, skipping`);
+      this.debug(`File ${configFile} does not exist, skipping`);
       return;
     }
 
     try {
-      configConvict.loadFile(configDir);
+      configConvict.loadFile(configFile);
     } catch (error) {
-      this.error(`Failed to load configuration from ${configDir}\n${error}`);
+      this.error(`Failed to load configuration from ${configFile}\n${error}`);
     }
 
     try {
       configConvict.validate({ allowed: 'strict' });
     } catch (error) {
-      this.error(`Failed to validate configuration after merging with ${configDir}\n${error}`);
+      this.error(`Failed to validate configuration after merging with ${configFile}\n${error}`);
     }
 
-    this.debug(`Successfully loaded and validated convict configuration from ${configDir}`);
+    this.debug(`Successfully loaded and validated convict configuration from ${configFile}`);
     this.debug(configConvict.getProperties());
   }
 }

@@ -1,4 +1,5 @@
 import { test } from '@oclif/test';
+import * as cliUtilsModule from '@bloomreach/cli-utils';
 import { jestExpect } from '@bloomreach/test-utils';
 import { Tasks } from '@bloomreach/cli-tasks';
 
@@ -15,6 +16,8 @@ jest.mock('@bloomreach/cli-services', () => require('../../../__mocks__/executab
 
 Tasks.choice = jest.fn();
 Tasks.fail = jest.fn();
+
+jest.spyOn(cliUtilsModule, 'writeJson').mockReturnValue(true);
 
 const gitExec = {
   name: 'git',
@@ -43,6 +46,8 @@ const mvnExec = {
   ],
 };
 
+const cmd = ['setup', '--config', 'test-config'];
+
 describe('setup', () => {
   beforeEach(() => {
     Tasks.choice.mockClear();
@@ -54,7 +59,7 @@ describe('setup', () => {
   describe('initial', () => {
     test
       .stdout()
-      .command(['setup', '--default'])
+      .command([...cmd, '--default'])
       .it('picks first path of git, java and mvn executables in default mode', (ctx: any) => {
         jestExpect(ctx.stdout).toMatchSnapshot();
         jestExpect(Tasks.choice).not.toHaveBeenCalled();
@@ -63,7 +68,7 @@ describe('setup', () => {
     test
       .do(() => mockChoices(0))
       .stdout()
-      .command(['setup'])
+      .command(cmd)
       .it('finds global installed git, java and mvn executables', (ctx: any) => {
         jestExpect(ctx.stdout).toMatchSnapshot();
         jestExpect(Tasks.choice).toHaveBeenCalledTimes(3);
@@ -72,7 +77,7 @@ describe('setup', () => {
     test
       .do(() => mockChoices(1))
       .stdout()
-      .command(['setup'])
+      .command(cmd)
       .it('can select absolute path from global installed git, java and mvn executables', (ctx: any) => {
         jestExpect(ctx.stdout).toMatchSnapshot();
         jestExpect(Tasks.choice).toHaveBeenCalledTimes(3);
@@ -81,7 +86,7 @@ describe('setup', () => {
     test
       .do(() => mockChoices(2))
       .stdout()
-      .command(['setup'])
+      .command(cmd)
       .it('can select symlink resolved absolute path from global installed git, java and mvn executables', (ctx: any) => {
         jestExpect(ctx.stdout).toMatchSnapshot();
         jestExpect(Tasks.choice).toHaveBeenCalledTimes(3);
@@ -97,7 +102,7 @@ describe('setup', () => {
         mockCustomPath('git', 'java', 'mvn');
       })
       .stdout()
-      .command(['setup'])
+      .command(cmd)
       .it('present option to set custom paths', (ctx: any) => {
         jestExpect(ctx.stdout).toMatchSnapshot();
       });
@@ -113,7 +118,7 @@ describe('setup', () => {
       })
       .stdout()
       .stderr()
-      .command(['setup'])
+      .command(cmd)
       .it('prints an error if custom path is invalid', () => {
         jestExpect(Tasks.fail.mock.calls).toHaveLength(3);
         jestExpect(Tasks.fail.mock.calls[0][0]).toMatchSnapshot();

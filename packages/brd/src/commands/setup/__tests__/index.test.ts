@@ -16,6 +16,11 @@ describe('Setup', () => {
         cli: {
           version: 'mock-app-version',
         },
+        env: {
+          configFile: 'mock-brd.json',
+          globalConfigFile: 'global-mock-brd.json',
+          projectConfigFile: 'project-mock-brd.json',
+        },
       },
       flags: {},
     };
@@ -23,18 +28,20 @@ describe('Setup', () => {
     (setup as any).getContext = jest.fn().mockReturnValue(mockCtx);
     setup.runTasks = jest.fn();
     setup.log = jest.fn();
+    setup.writeGlobalConfigFile = jest.fn().mockReturnValue(true);
 
     Tasks.detectExecutable = jest.fn().mockImplementation((name: string) => name);
   });
 
-  it('Does not execute tasks if already installed', async () => {
+  it('does not execute tasks if already installed', async () => {
     mockCtx.config.app.get.mockReturnValue(true);
     await setup.run();
     expect(setup.log).toHaveBeenCalled();
     expect(setup.runTasks).not.toHaveBeenCalled();
+    expect(setup.writeGlobalConfigFile).not.toHaveBeenCalled();
   });
 
-  it('Detects executable for git, java and maven', async () => {
+  it('detects executable for git, java and maven and writes a config file', async () => {
     await setup.run();
 
     expect(Tasks.detectExecutable).toHaveBeenCalledTimes(3);
@@ -46,7 +53,7 @@ describe('Setup', () => {
     expect(runTasksArgs()).toHaveLength(3);
   });
 
-  it('Detect java/maven task is only enabled if previous task finished successfully', async () => {
+  it('it only enables java/maven task if previous task has finished successfully', async () => {
     await setup.run();
 
     const tasks = setup.runTasks.mock.calls[0][0]();
@@ -57,5 +64,19 @@ describe('Setup', () => {
     expect(tasks[2].enabled).toBeDefined();
     expect(tasks[2].enabled({})).toBe(false);
     expect(tasks[2].enabled({ maven: true })).toBe(true);
+  });
+
+  it('writes a config file', async () => {
+    await setup.run();
+
+    expect(setup.writeGlobalConfigFile).toHaveBeenCalled();
+  });
+
+  it('prints an error if unable to write globabl config file', async () => {
+    setup.writeGlobalConfigFile.mockReturnValue(false);
+    setup.error = jest.fn();
+    await setup.run();
+
+    expect(setup.error).toHaveBeenCalledWith('Failed to write global config file global-mock-brd.json');
   });
 });

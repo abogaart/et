@@ -23,18 +23,14 @@ export default class Setup extends BrdCommand<SetupFlags> {
 
   async run(): Promise<any> {
     const ctx = this.getContext();
-    const { app, cli } = ctx.config;
+    const { app, cli, env } = ctx.config;
 
     if (app.get('installed')) {
-      this.log('The "brd" command is installed with the following properties');
+      this.log('\nThe "brd" command is already installed with the following global properties:');
       this.log(app.toString());
     } else {
       this.log(`\nThe "brd" command has not been installed yet, starting initial setup of version ${cli.version}\n`);
 
-      // is git installed?
-      // is java installed?
-      // is maven installed?
-      // is BR related data installed?
       const tasks = [
         Tasks.detectExecutable('git',
           (path: string, listrCtx: ListrContext) => {
@@ -70,9 +66,13 @@ export default class Setup extends BrdCommand<SetupFlags> {
       ];
 
       await this.runTasks(() => tasks);
-
       app.set('installed', true);
-      this.log(`\nSetup has successfully finished\n${app}`);
+
+      if (await this.writeGlobalConfigFile()) {
+        this.log(`\nSetup has successfully finished\n${app}`);
+      } else {
+        this.error(`Failed to write global config file ${env.globalConfigFile}`);
+      }
     }
   }
 }

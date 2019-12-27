@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`setup already installed print merged config if already stalled 1`] = `
-"The \\"brd\\" command is installed with the following properties
+"
+The \\"brd\\" command is already installed with the following global properties:
 {
   \\"installed\\": true,
   \\"version\\": \\"bet-installed\\",
