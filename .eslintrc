@@ -12,7 +12,7 @@
       "project": ["./tsconfig.lint.json", "./packages/*/tsconfig.json"],
       "sourceType": "module"
   },
-  "ignorePatterns": ["**/schema.ts", "packages/*/lib", "node_modules"],
+  "ignorePatterns": ["**/schema.ts", "packages/*/lib", "node_modules", "coverage"],
   "overrides": [
     {
       "files": [

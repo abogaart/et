@@ -50,7 +50,8 @@
     "directory": "packages/cli"
   },
   "scripts": {
-    "compile": "tsc -b --clean && tsc -b",
+    "compile": "tsc -b",
+    "compile:clean": "tsc -b --clean && tsc -b",
     "compile:watch": "tsc -b --watch",
     "test": "jest",
     "test:ci": "jest --coverage --coverage-reporters=lcov"

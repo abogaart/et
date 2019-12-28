@@ -9,6 +9,12 @@
     "strict": true,
     "outDir": "lib",
     "declarationDir": "lib",
-    "baseUrl": "."
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "**/__tests__",
+    "**/__mocks__",
+    "**/__fixtures__",
+    "**/lib"
+  ],
 }

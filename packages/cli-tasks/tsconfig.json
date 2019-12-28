@@ -6,11 +6,6 @@
     "declarationDir": "./lib",
   },
   "include": ["./src/**/*"],
-  "exclude": [
-    "**/__tests__/**",
-    "**/__mocks__/**",
-    "**/__fixtures__/**"
-  ],
   "references": [
     { "path": "../cli-services" },
     { "path": "../cli-utils" },

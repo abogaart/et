@@ -3,8 +3,6 @@
   "compilerOptions": {
     "noEmit": true,
     "sourceMap": true,
-    // "inlineSources": true,
-    // "inlineSourceMap": true,
     "types": ["node", "jest"]
   },
   "include": [

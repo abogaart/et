@@ -6,12 +6,8 @@
     "declarationDir": "./lib",
   },
   "include": ["./src/**/*"],
-  "exclude": ["**/__tests__/*", "**/__mocks__/*", "**/__fixtures__/*"],
   "references": [
     { "path": "../cli-utils" },
     { "path": "../test-utils" }
   ]
-
-  // "references": [
-  //   { "path": "../apollo-codegen-flow" },
 }
